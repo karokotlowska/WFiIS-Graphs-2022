@@ -6,25 +6,22 @@ from Sequence import Sequence
 import plotter as pl
 from tkinter import *
 
-
-
-
-
+#dodac rysowanie
 
 if __name__ == '__main__':
-    seq=[4, 2, 2, 3, 2, 1, 4, 2, 2, 2, 2]
+    #---------cz1
+    seq=[4, 2, 2, 3, 2, 1, 4, 2, 2, 2, 2] #sequence OK
 
-    ##seq=[4, 4, 3, 1, 2]
+    ##seq=[4, 4, 3, 1, 2] #sequence not OK
 
     sequence = Sequence(seq)
     print(sequence.ifSequenceIsGraph()) ## True if sequence OK
 
     adjacencyList=sequence.sequenceToAdjacencyList()
 
-    top = Tk()
-    canvas = Canvas(top, bg="blue", height=250, width=300)
-    pl.plotGraph(canvas, adjacencyList)
-    #top.mainloop()
+             
+    
+    #---------cz2
 
 
 
