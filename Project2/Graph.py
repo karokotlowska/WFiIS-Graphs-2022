@@ -3,9 +3,10 @@ import random
 from Edge import Edge
 
 class Graph:
-    def __init__(self, vertices: int = 0, edges: list = [], adjecencyList: AdjacencyList = None):
+    def __init__(self, vertices: int = 0, edges: list = [], probability: float =0, adjecencyList: AdjacencyList = None):
         self.vertices=vertices
         self.edges=edges
+        self.probability=probability
         self.adjacencyList=adjecencyList
         self.adjacencyMatrix=self.adjacencyList.convertToAM()
 
