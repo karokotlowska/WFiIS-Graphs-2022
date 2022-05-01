@@ -6,11 +6,6 @@ from Sequence import Sequence
 from Graph import Graph
 
 
-
-
-
-
-
 if __name__ == '__main__':
 
     #zad1------
@@ -18,14 +13,13 @@ if __name__ == '__main__':
 
     ##seq=[4, 4, 3, 1, 2]
 
-    sequence = Sequence(seq)  
-    print(sequence.ifSequenceIsGraph())  ## True if sequence OK
+    sequence = Sequence(seq)
+    print("Czy zadany ciag graficzny moze reprezentowac graf?",sequence.ifSequenceIsGraph())  ## True if sequence OK
 
     adjacencyList = sequence.sequenceToAdjacencyList()
-
-    print(adjacencyList.convertToAM())
+    print("Macierz sasiedztwa na podstawie ciagu graficznego:/n",adjacencyList.convertToAM())
 
     # zad2------
-    print("Randomizacja wykonana ", Graph(adjacencyList).randomize(adjacencyList, 10), " razy")
+    print("Randomizacja wykonana ", Graph(0, [], adjacencyList).randomize(adjacencyList, 10), " razy")
 
     # top.mainloop()
