@@ -3,19 +3,19 @@ import random
 from Edge import Edge
 
 class Graph:
-    def __init__(self, adjecencyList=None,adjacencyMatrix=None):
+    def __init__(self, vertices: int = 0, edges: list = [], adjecencyList: AdjacencyList = None):
+        self.vertices=vertices
+        self.edges=edges
         self.adjacencyList=adjecencyList
-        self.adjacencyMatrix=adjacencyMatrix
+        self.adjacencyMatrix=self.adjacencyList.convertToAM()
+
 
     def randomize(self,adjacencyList: AdjacencyList, n=1):
         randomizationCount = False
 
         listOfEdges = []
 
-        if self.adjacencyMatrix is None:
-            am = adjacencyList.convertToAM()
-        else:
-            am = self.adjacencyMatrix
+        am = self.adjacencyMatrix
 
 
         for i in range(len(am)):
