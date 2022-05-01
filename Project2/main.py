@@ -17,9 +17,10 @@ if __name__ == '__main__':
     print("Czy zadany ciag graficzny moze reprezentowac graf?",sequence.ifSequenceIsGraph())  ## True if sequence OK
 
     adjacencyList = sequence.sequenceToAdjacencyList()
-    print("Macierz sasiedztwa na podstawie ciagu graficznego:/n",adjacencyList.convertToAM())
+
+    print("Lista sasiedztwa na podstawie ciagu graficznego:/n",adjacencyList.convertToAM())
 
     # zad2------
-    print("Randomizacja wykonana ", Graph(0, [], adjacencyList).randomize(adjacencyList, 10), " razy")
+    print("Randomizacja wykonana ", Graph(0, [], 0, adjacencyList).randomize(adjacencyList, 10), " razy")
 
     # top.mainloop()
