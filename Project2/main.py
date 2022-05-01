@@ -3,26 +3,29 @@ from collections import defaultdict
 import fileReader as fr
 
 from Sequence import Sequence
-import plotter as pl
-from tkinter import *
+from Graph import Graph
 
-#dodac rysowanie
+
+
+
+
+
 
 if __name__ == '__main__':
-    #---------cz1
-    seq=[4, 2, 2, 3, 2, 1, 4, 2, 2, 2, 2] #sequence OK
 
-    ##seq=[4, 4, 3, 1, 2] #sequence not OK
+    #zad1------
+    seq = [4, 2, 2, 3, 2, 1, 4, 2, 2, 2, 2]
 
-    sequence = Sequence(seq)
-    print(sequence.ifSequenceIsGraph()) ## True if sequence OK
+    ##seq=[4, 4, 3, 1, 2]
 
-    adjacencyList=sequence.sequenceToAdjacencyList()
+    sequence = Sequence(seq)  
+    print(sequence.ifSequenceIsGraph())  ## True if sequence OK
 
-             
-    
-    #---------cz2
+    adjacencyList = sequence.sequenceToAdjacencyList()
 
+    print(adjacencyList.convertToAM())
 
+    # zad2------
+    print("Randomizacja wykonana ", Graph(adjacencyList).randomize(adjacencyList, 10), " razy")
 
-
+    # top.mainloop()
