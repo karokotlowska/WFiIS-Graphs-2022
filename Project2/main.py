@@ -8,23 +8,26 @@ from collections import defaultdict
 from Sequence import Sequence
 from Graph import Graph
 from Components import *
+from AdjacencyList import AdjacencyList
 
 
 if __name__ == '__main__':
 
-    seq = [4, 2, 2, 3, 2, 1, 4, 2, 2, 2, 2]
+    seq = [ 4, 2, 2, 3, 2, 1, 4 ,2 ,2 ,2 ,2]
 
     ##seq=[4, 4, 3, 1, 2]
 
-    sequence = Sequence(seq)
+    sequence=Sequence(seq)
+    print("Wpisana sekwencja", sequence)
     print("Czy zadany ciag graficzny moze reprezentowac graf?",sequence.ifSequenceIsGraph())  ## True if sequence OK
 
-    adjacencyList = sequence.sequenceToAdjacencyList()
+    adjacencyMatrix= sequence.sequenceToAdjacencyMatrix()
+    adjacencyList=adjacencyMatrix.convertToAL()
 
-    print("Lista sasiedztwa na podstawie ciagu graficznego:/n",adjacencyList.convertToAM())
+    print("Lista sasiedztwa dla wczytanej sekwencji:",adjacencyList)
 
     '''code to draw graph'''
-    g=Graph(0, None, 0, adjacencyList)
+    g=Graph(0, None, 0, AdjacencyList(adjacencyList))
     g.drawGraph()
 
     # zad2------
