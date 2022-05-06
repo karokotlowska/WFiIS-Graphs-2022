@@ -1,11 +1,12 @@
 import copy
 from AdjacencyList import AdjacencyList
+from AdjacencyMatrix import AdjacencyMatrix
 from operator import itemgetter
 
 class Sequence:
 
-    def __init__(self, *args):
-        self.seq=args[0]
+    def __init__(self, seq):
+        self.seq=seq
 
     def __str__(self):
         sequence = "(" + str(self.seq[0])
@@ -43,20 +44,20 @@ class Sequence:
             del seq_copy[0]
         return false
 
-    def sequenceToAdjacencyList(self):
-        indexed_data = [[index, idx] for index, idx in enumerate(self.seq)]
+    def sequenceToAdjacencyMatrix(self):
+        n=len(self.seq)
+        degseq=copy.copy(self.seq)
+        mat = [[0] * n for i in range(n)]
 
-        adjacency_list = [[] for _ in range(len(indexed_data))]
+        for i in range(n):
+            for j in range(i + 1, n):
+                if (degseq[i] > 0 and degseq[j] > 0):
+                    degseq[i] -= 1
+                    degseq[j] -= 1
+                    mat[i][j] = 1
+                    mat[j][i] = 1
 
-        for _ in range(len(indexed_data)):
-            indexed_data.sort(reverse=True, key=itemgetter(1))
-            i = 0
-            j = i + 1
-            while indexed_data[i][1] > 0 and j < len(indexed_data):
-                adjacency_list[indexed_data[i][0]].append(indexed_data[j][0])
-                adjacency_list[indexed_data[j][0]].append(indexed_data[i][0])
-                indexed_data[i][1] -= 1
-                indexed_data[j][1] -= 1
-                j += 1
-        print(adjacency_list)
-        return AdjacencyList(adjacency_list)
+
+        return AdjacencyMatrix(mat)
+
+      
