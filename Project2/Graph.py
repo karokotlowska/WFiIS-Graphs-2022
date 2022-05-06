@@ -21,6 +21,37 @@ class Graph:
             self.adjacencyMatrix=self.adjacencyList.convertToAM()
 
 
+    def drawGraph(self):
+        global root
+
+        root = tk.Tk()
+        root.geometry('600x600')
+        canvas = tk.Canvas(root, height=600, width=600, bg="white")
+        diff_angle = 2 * math.pi / len(self.adjacencyMatrix)
+
+        for i in range(len(self.adjacencyMatrix)):
+            angle_circle = i * diff_angle
+            x_circle = 300 + 200 * math.sin(angle_circle)
+            y_circle = 300 - 200 * math.cos(angle_circle)
+            neighbour_id = 0
+
+            # create edges
+            for neighbour in self.adjacencyMatrix[i]:
+                if neighbour_id > i and int(neighbour) > 0:
+                    angle_neighbour = diff_angle * neighbour_id
+                    x_neighbour = 300 + 200 * math.sin(angle_neighbour)
+                    y_neighbour = 300 - 200 * math.cos(angle_neighbour)
+                    canvas.create_line(x_circle, y_circle, x_neighbour, y_neighbour)
+
+                neighbour_id += 1
+
+            canvas.create_oval(x_circle - 25, y_circle - 25, x_circle + 25, y_circle + 25, fill="red")
+            canvas.create_text(x_circle, y_circle, text=i)
+
+        canvas.pack()
+        root.mainloop()
+
+
     def drawWeightGraph(self):
         global root
 
@@ -45,7 +76,7 @@ class Graph:
 
                 neighbour_id += 1
 
-            canvas.create_oval(x_circle - 25, y_circle - 25, x_circle + 25, y_circle + 25, fill="white")
+            canvas.create_oval(x_circle - 25, y_circle - 25, x_circle + 25, y_circle + 25, fill="red")
             canvas.create_text(x_circle, y_circle, text=i)
 
         for i in range(len(self.adjacencyMatrix)):
