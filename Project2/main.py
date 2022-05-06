@@ -12,22 +12,28 @@ from Components import *
 
 if __name__ == '__main__':
 
-    #zad1------
-    # seq = [4, 2, 2, 3, 2, 1, 4, 2, 2, 2, 2]
+    seq = [4, 2, 2, 3, 2, 1, 4, 2, 2, 2, 2]
 
-    # ##seq=[4, 4, 3, 1, 2]
+    ##seq=[4, 4, 3, 1, 2]
 
-    # sequence = Sequence(seq)
-    # print("Czy zadany ciag graficzny moze reprezentowac graf?",sequence.ifSequenceIsGraph())  ## True if sequence OK
+    sequence = Sequence(seq)
+    print("Czy zadany ciag graficzny moze reprezentowac graf?",sequence.ifSequenceIsGraph())  ## True if sequence OK
 
-    # adjacencyList = sequence.sequenceToAdjacencyList()
+    adjacencyList = sequence.sequenceToAdjacencyList()
 
-    # print("Lista sasiedztwa na podstawie ciagu graficznego:/n",adjacencyList.convertToAM())
+    print("Lista sasiedztwa na podstawie ciagu graficznego:/n",adjacencyList.convertToAM())
 
-    # # zad2------
-    # print("Randomizacja wykonana ", Graph(0, [], 0, adjacencyList).randomize(adjacencyList, 10), " razy")
+    '''code to draw graph'''
+    g=Graph(0, None, 0, adjacencyList)
+    g.drawGraph()
 
-    # top.mainloop()
+    # zad2------
+    g=Graph(0, None, 0, adjacencyList)
+    randomizationTimes=g.randomize(adjacencyList, 10)
+    print("Randomizacja wykonana ",randomizationTimes, " razy")
+
+    '''code to draw graph'''
+    g.drawGraph()
 
     # zad3
     adjacencyList = AL.AdjacencyList(fr.readMatrix("../Project1/ls.txt"))
