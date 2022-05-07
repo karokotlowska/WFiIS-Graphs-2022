@@ -1,14 +1,16 @@
-from AdjacencyList import AdjacencyList
 import random
-from Edge import Edge
-from Node import Node
-import randomGraph as randomGraph
-from queue import PriorityQueue
 import math
-import matplotlib.pyplot as plt
 import networkx as nx
-from functools import partial
+import matplotlib.pyplot as plt
 import tkinter as tk
+import randomGraph as randomGraph
+
+from AdjacencyList import *
+from AdjacencyMatrix import *
+from Edge import Edge
+# from Node import Node
+from queue import PriorityQueue
+from functools import partial
 
 class Graph:
     def __init__(self, vertices: int = 0, edges: list = [], probability: float =0, adjecencyList: AdjacencyList = None):
@@ -18,7 +20,7 @@ class Graph:
         if edges is  None:
             self.edges = list()
         if adjecencyList is not None:
-            self.adjacencyMatrix=self.adjacencyList.convertToAM()
+            self.adjacencyMatrix=self.adjacencyList.convertToAM().adjMatrix
 
 
     def drawGraph(self):
@@ -46,7 +48,7 @@ class Graph:
                 neighbour_id += 1
 
             canvas.create_oval(x_circle - 25, y_circle - 25, x_circle + 25, y_circle + 25, fill="red")
-            canvas.create_text(x_circle, y_circle, text=i)
+            canvas.create_text(x_circle, y_circle, text=i+1)
 
         canvas.pack()
         root.mainloop()
@@ -77,7 +79,7 @@ class Graph:
                 neighbour_id += 1
 
             canvas.create_oval(x_circle - 25, y_circle - 25, x_circle + 25, y_circle + 25, fill="red")
-            canvas.create_text(x_circle, y_circle, text=i)
+            canvas.create_text(x_circle, y_circle, text=i+1)
 
         for i in range(len(self.adjacencyMatrix)):
             angle_circle = i * diff_angle
@@ -102,8 +104,6 @@ class Graph:
         root.mainloop()
 
 
-
-
     def generateRandomWeighted(self):
         self.adjacencyMatrix=randomGraph.randomGraphWithProbability(self.vertices, self.probability)
         print(f"Losowo wygenerowany graf (macierz sasiedztwa): {self.adjacencyMatrix}\n")
@@ -116,14 +116,12 @@ class Graph:
             print(f"Wagi dla krawedzi: {i}\n")
 
 
-
-    def randomize(self,adjacencyList: AdjacencyList, n=1):
+    def randomize(self, n=1):
         randomizationCount = False
 
         listOfEdges = []
 
         am = self.adjacencyMatrix
-
 
         for i in range(len(am)):
             for j in range(i):
@@ -170,6 +168,7 @@ class Graph:
         print("\nMacierz sasiedztwa z wagami",am,"\n\n")
         return am
 
+
     def adj_to_list(self,adj: list):
         temp_list = [[] for _ in range(len(adj))]
         for x in range(len(adj)):
@@ -179,11 +178,13 @@ class Graph:
                     temp_list[y].append(x + 1)
         return temp_list
 
+
     def get_neighbours(self, node_id: int):
         all_neighbours_list = self.adj_to_list(self.adjacencyMatrix)
         node_neighbours_list = all_neighbours_list[node_id]
         node_neighbours_list = list(map(lambda x: x - 1, node_neighbours_list))
         return node_neighbours_list
+
 
     def get_edge_weight(self, node_start: int, node_end: int):
         for edge in self.edges:
@@ -191,6 +192,7 @@ class Graph:
                 return edge.weight
             if edge.i == node_end and edge.j == node_start:
                 return edge.weight
+
 
     def dijkstra(self, start, end=-1):
         current = start

@@ -42,7 +42,7 @@ class Sequence:
             for i in range(1, seq_copy[0] + 1):
                 seq_copy[i] += - 1
             del seq_copy[0]
-        return false
+
 
     def sequenceToAdjacencyMatrix(self):
         n=len(self.seq)
@@ -57,7 +57,4 @@ class Sequence:
                     mat[i][j] = 1
                     mat[j][i] = 1
 
-
         return AdjacencyMatrix(mat)
-
-      

@@ -2,56 +2,39 @@ import fileReader as fr
 import AdjacencyList as AL
 import AdjacencyMatrix as AM
 import randomGraph as rg
-import plotter as pl
-from tkinter import *
+import tkinter as tkinter
 
-#Test AdjecencyList and its methods
-'''
-adjacencyList = AL.AdjacencyList(fr.readMatrix("ls.txt"))
+#Test AdjacencyList and its methods
+adjacencyList = AL.AdjacencyList(fr.readMatrix("adjacencyList.txt"))
+adjacencyList.print()
 
-adjMatrix=adjacencyList.convertToAM()
+adjacencyMatrix=adjacencyList.convertToAM()
+adjacencyMatrix.print()
 
-for i in adjMatrix:
-    print(i)
 
-fot row in adjacencyList.adjList
-    print(row)
-'''
 #Test AdjacencyMatrix and its methods
+adjacencyMatrix=AM.AdjacencyMatrix(fr.readMatrix("adjacencyMatrix.txt"))
+adjacencyMatrix.print()
 
-adjecencyMatrix=AM.AdjacencyMatrix(fr.readMatrix("ms.txt"))
+adjacencyList=adjacencyMatrix.convertToAL()
+adjacencyList.print()
 
-#adjList=adjecencyMatrix.convertToAL()
+incidenceMatrix=adjacencyMatrix.convertToIM()
+incidenceMatrix.print()
 
-incMatrix=adjecencyMatrix.convertToIM()
-
-
-#for i in adjecencyMatrix.adjMatrix:
-#    print(i)
-#for row in adjList:
-#    print(row)
-for row in incMatrix:
-    print(row)
 
 #Test of incidencyMatrix and its methods
-'''
-'''
-#Task2 Drawing graph
-adjacencyList = AL.AdjacencyList(fr.readMatrix("ls.txt"))
-top = Tk()
-canvas = Canvas(top, bg="blue", height=250, width=300)
 
-pl.plotGraph(canvas,adjacencyList)
+
+#Task2 Drawing graph
 
 
 #Task3 Random Graphs
-'''
-matrix=rg.randomGraphWithProbability(10,0.5)
+
+# matrix=rg.randomGraphWithProbability(10,0.5)
 #for row in matrix:
 #    print(row)
 
-matrix=randomGraphwithNumberOfEdges(10,5)   
+# matrix=randomGraphwithNumberOfEdges(10,5)
 #for row in matrix:
 #    print(row)
-
-'''
