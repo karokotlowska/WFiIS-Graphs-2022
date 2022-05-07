@@ -31,7 +31,7 @@ if __name__ == '__main__':
     g.drawGraph()
 
     # zad2------
-    g=Graph(0, None, 0, adjacencyList)
+    g=Graph(0, None, 0, AdjacencyList(adjacencyList))
     randomizationTimes=g.randomize(adjacencyList, 10)
     print("Randomizacja wykonana ",randomizationTimes, " razy")
 
