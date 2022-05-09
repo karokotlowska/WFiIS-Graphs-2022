@@ -1,4 +1,6 @@
 import AdjacencyMatrix as AM
+import IncidenceMatrix as IM
+
 class AdjacencyList:
 
     def __init__(self, listMatrix):
@@ -20,7 +22,7 @@ class AdjacencyList:
     def convertToIM(self):
         incidenceMatrix = []
         adjListCopy = list(self.adjList)
-
+        
         edgesNumber = 0
         for i in self.adjList:
             edgesNumber += len(i)
@@ -29,6 +31,15 @@ class AdjacencyList:
         for i in range(self.verticesNumber):
             help=[0 for i in range(edgesNumber)]
             incidenceMatrix.append(help)
+
+        edge = 0
+        for i, row in enumerate(adjListCopy):
+            for j in row:
+                incidenceMatrix[i][edge] = 1
+                incidenceMatrix[j-1][edge] = 1
+                adjListCopy[j-1].remove(i+1)
+                edge+=1
+        return IM.IncidenceMatrix(incidenceMatrix)
 
     def print(self):
         print('Lista sasiedztwa:\n', self.adjList, '\n')
