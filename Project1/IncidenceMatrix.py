@@ -1,3 +1,6 @@
+import AdjacencyMatrix as AM
+import AdjacencyList as AL
+
 class IncidenceMatrix:
 
     def __init__(self, listMatrix):
@@ -17,7 +20,7 @@ class IncidenceMatrix:
                 elif self.incList[j][i] == 1 and f == True:
                     adjacencyMatrix[fVindex][j] = 1
                     adjacencyMatrix[j][fVindex] = 1
-        return adjacencyMatrix
+        return AM.AdjacencyMatrix(adjacencyMatrix)
 
     def convertToAL(self):
         adjacencyList = [[] for _ in range(self.verticesNumber)]
@@ -35,11 +38,10 @@ class IncidenceMatrix:
 
         for i in adjacencyList:
             i.sort()
-        return adjacencyList
+        return AL.AdjacencyList(adjacencyList)
                 
 
             
-
     def print(self):
         print('Macierz incydencji:')
         for i in self.incList:
