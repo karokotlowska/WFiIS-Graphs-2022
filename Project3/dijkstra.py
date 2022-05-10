@@ -12,12 +12,11 @@ def dijkstra(w, s):
     d_s = [0] * n
     p_s = [0] * n
 
-#init----------
+'''initialize'''
     for i in range(n):
         d_s[i] = math.inf
         p_s[i] = None
     d_s[s] = 0
-#--------------
 
     not_ready = [i for i in range(n)]
 
