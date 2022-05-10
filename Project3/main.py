@@ -19,4 +19,10 @@ if __name__ == '__main__':
     graph.generateRandomWeighted()
     graph.drawWeightGraph()
 
-    # zad2------
+    print('------zad2------ dijkstra')
+
+    start_vertex = 0
+    end_vertex = 1
+    
+    d, p = dijkstra(graph.getWeightAM(), start_vertex)
+    print_dijkstra(d, p, start_vertex)
