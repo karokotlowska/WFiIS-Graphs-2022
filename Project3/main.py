@@ -8,6 +8,7 @@ import fileReader as fr
 import AdjacencyList as AL
 from Sequence import Sequence
 from Graph import Graph
+from dijkstra import dijkstra, print_dijkstra
 
 
 if __name__ == '__main__':
