@@ -9,6 +9,8 @@ from Graph import *
 from Components import *
 from AdjacencyList import *
 from Euler import *
+from Regular import randomK_RegularGraph
+from Hamilton import checkHamilton
 
 
 if __name__ == '__main__':
@@ -55,3 +57,20 @@ if __name__ == '__main__':
     print('-----zad4-----')
     euler_cycle = generate_euler_graph(10)
     print('Cykl Eulera: ', euler_cycle)
+
+     # zad5------
+    
+    print('-----zad5-----')
+    adjacencyList = AdjacencyList(randomK_RegularGraph())
+    print('k-regularny graf: ')
+    adjacencyList.print()
+    g = Graph(0, None, 0, adjacencyList)
+    g.drawGraph()
+    
+    # zad6------
+
+    print('-----zad6-----')
+    adjacencyList = AdjacencyList(fr.readMatrix('./Hamilton.txt'))
+    adjacencyList.print()
+    check = checkHamilton(adjacencyList.convertToAM(), 1)
+    print('czy graf jest hamiltonowski: ', check)
