@@ -15,29 +15,37 @@ from Hamilton import checkHamilton
 
 if __name__ == '__main__':
 
-    # zad1-------
-    print('-----zad1-----')
+    print('\n\n-----zad1-----PRZYKLAD CIAGU GRAFICZNEGO')
 
-    seq = [ 4, 2, 2, 3, 2, 1, 4 ,2 ,2 ,2 ,2]
+    #seq = [6,6,6,6,6,4,4,2]
     #seq=[4, 4, 3, 1, 2]
 
-    sequence = Sequence(seq)
+    sequence = Sequence(fr.readSequence("sequence.txt"))
+
     print("Wpisana sekwencja", sequence)
-    print("Czy zadany ciag graficzny moze reprezentowac graf?", sequence.ifSequenceIsGraph())  ## True if sequence OK
+    print("Czy zadany ciag graficzny moze reprezentowac graf?", sequence.ifSequenceIsGraph())
 
-    adjacencyMatrix = sequence.sequenceToAdjacencyMatrix()
-    adjacencyList = adjacencyMatrix.convertToAL()
+    '''adjacency matrix and adjacency list from sequence'''
+    adjacencyMatrix, adjacencyList = sequence.sequenceToAdjacencyMatrixAndList()
 
-    print("Lista sasiedztwa dla wczytanej sekwencji:", adjacencyList.adjList)
+    g = Graph(0, None, 0, adjacencyList)
 
-    g=Graph(0, None, 0, adjacencyList)
-    g.drawGraph()
-    print()
+    if sequence.ifSequenceIsGraph() is False:
+        print("Nie da sie narysowac grafu")
+    else:
+        g.drawGraph()
 
 
-    # zad2------
-    g=Graph(0, None, 0, adjacencyList)
-    randomizationTimes=g.randomize(10)
+    print('\n\n-----zad1-----PRZYKLAD CIAGU NIEGRAFICZNEGO')
+
+    sequence2 = Sequence(fr.readSequence("sequence2.txt"))
+    print("Wpisana sekwencja", sequence2)
+    print("Czy zadany ciag graficzny moze reprezentowac graf?", sequence2.ifSequenceIsGraph())
+
+
+    print('\n\n-----zad2-----')
+    g = Graph(0, None, 0, adjacencyList)
+    randomizationTimes = g.randomize(10)
     print("Randomizacja wykonana ", randomizationTimes, " razy\n")
     g.drawGraph()
 
