@@ -43,18 +43,37 @@ class Sequence:
                 seq_copy[i] += - 1
             del seq_copy[0]
 
+def sequenceToAdjacencyMatrixAndList(self):
 
-    def sequenceToAdjacencyMatrix(self):
-        n=len(self.seq)
-        degseq=copy.copy(self.seq)
-        mat = [[0] * n for i in range(n)]
+        deg_seq=copy.copy(self.seq)
+        n = len(self.seq)
 
-        for i in range(n):
-            for j in range(i + 1, n):
-                if (degseq[i] > 0 and degseq[j] > 0):
-                    degseq[i] -= 1
-                    degseq[j] -= 1
-                    mat[i][j] = 1
-                    mat[j][i] = 1
+        list.sort(deg_seq, reverse=True)
 
-        return AdjacencyMatrix(mat)
+        matrix = [[0 for i in range(n)] for j in range(n)]
+
+        '''matrix of indexes and values from graph sequence'''
+        sub_matrix = [[i, deg_seq[i]] for i in range(n)]
+
+        ''' - iterating through number of edges
+        - sorting sub_matrix to have a list descending list of leftover vertices
+        - iterating through number of vertices
+        - substracting one edge from n next edges
+        - adding '1' to matrix from which the edge was taken
+        '''
+        for _ in range(len(sub_matrix)):
+            sub_matrix.sort(reverse=True, key=itemgetter(1))
+            for i in range(1, sub_matrix[0][1] + 1):
+                sub_matrix[i][1] -= 1
+                sub_matrix[0][1] -= 1
+                matrix[sub_matrix[i][0]][sub_matrix[0][0]] = 1
+                matrix[sub_matrix[0][0]][sub_matrix[i][0]] = 1
+
+
+        adjacencyMatrix = AdjacencyMatrix(matrix)
+        adjacencyList = AdjacencyList(adjacencyMatrix.convertToAL())
+
+        print("Lista sasiedztwa: ", adjacencyMatrix.convertToAL())
+        print("Macierz sąsiedztwa: ", matrix)
+
+        return adjacencyMatrix, adjacencyList
