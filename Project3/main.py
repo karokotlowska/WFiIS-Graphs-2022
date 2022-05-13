@@ -9,6 +9,7 @@ import AdjacencyList as AL
 from Sequence import Sequence
 from Graph import Graph
 from dijkstra import dijkstra, print_dijkstra
+from DistanceMatrix import *
 
 
 if __name__ == '__main__':
@@ -23,7 +24,11 @@ if __name__ == '__main__':
     print('------zad2------ dijkstra')
 
     start_vertex = 0
-    end_vertex = 1
-    
-    d, p = dijkstra(graph.getWeightAM(), start_vertex)
+    am_weighted = graph.getWeightAM()
+    d, p = dijkstra(am_weighted, start_vertex)
     print_dijkstra(d, p, start_vertex)
+
+    print('------zad3------ distance matrix')
+    empty_distance_matrix = DistanceMatrix(len(am_weighted))
+    distance_matrix = empty_distance_matrix.fill_distance_matrix(am_weighted)
+    distance_matrix.print()
