@@ -37,7 +37,7 @@ class Graph:
             y_circle = 300 - 200 * math.cos(angle_circle)
             neighbour_id = 0
 
-            # create edges
+
             for neighbour in self.adjacencyMatrix[i]:
                 if neighbour_id > i and int(neighbour) > 0:
                     angle_neighbour = diff_angle * neighbour_id
@@ -78,7 +78,7 @@ class Graph:
             y_circle = 300 - 200 * math.cos(angle_circle)
             neighbour_id = 0
 
-            # create edges
+
             for neighbour in self.adjacencyMatrix[i]:
                 if neighbour_id > i and int(neighbour) > 0:
                     angle_neighbour = diff_angle * neighbour_id
@@ -97,7 +97,7 @@ class Graph:
             y_circle = 300 - 200 * math.cos(angle_circle)
             neighbour_id = 0
 
-            # create edges
+
             for neighbour in self.adjacencyMatrix[i]:
                 if neighbour_id > i and int(neighbour) > 0:
                     angle_neighbour = diff_angle * neighbour_id
@@ -115,7 +115,7 @@ class Graph:
 
 
     def generateRandomWeighted(self):
-        self.adjacencyMatrix=randomGraph.randomGraphWithProbability(self.vertices, self.probability)
+        self.adjacencyMatrix = randomGraph.randomGraphWithProbability(self.vertices, self.probability)
         print(f"Losowo wygenerowany graf (macierz sasiedztwa): {self.adjacencyMatrix}\n")
         for i in range(0, len(self.adjacencyMatrix)):
             for j in range(0, i):
@@ -123,7 +123,7 @@ class Graph:
                     new_edge = Edge(i, j, random.randint(1, 10))
                     self.edges.append(new_edge)
         for i in self.edges:
-            print(f"Wagi dla krawedzi: {i}\n")
+            print(f"Wagi dla krawedzi: {i}")
 
 
     def randomize(self, n=1):
@@ -144,38 +144,34 @@ class Graph:
             y = random.randint(0, len(listOfEdges) - 1)
             nodesFirstPair: list = [listOfEdges[x].i, listOfEdges[x].j]
             nodesSecondPair: list = [listOfEdges[y].i, listOfEdges[y].j]
-            edge_1 = Edge(listOfEdges[x].i, listOfEdges[y].j)
-            edge_2 = Edge(listOfEdges[y].i, listOfEdges[x].j)
-            if edge_1 not in listOfEdges and edge_2 not in listOfEdges and len(nodesFirstPair) == len(
+            edge1 = Edge(listOfEdges[x].i, listOfEdges[y].j)
+            edge2 = Edge(listOfEdges[y].i, listOfEdges[x].j)
+            if edge1 not in listOfEdges and edge2 not in listOfEdges and len(nodesFirstPair) == len(
                     set(nodesFirstPair)) and len(nodesSecondPair) == len(set(nodesSecondPair)):
                 listOfEdges[x].j, listOfEdges[y].j = listOfEdges[y].j, listOfEdges[x].j
                 n -= 1
                 randomizationCount += 1
 
-        for i in range(len(am)):
-            for j in range(len(am)):
-                am[i][j] = 0
+        am = [[0]*len(am) for _ in range(len(am))]
 
         for val in listOfEdges:
-            start = val.i
-            end = val.j
-            am[start][end] = 1
-            am[end][start] = 1
+            am[val.i][val.j] = 1
+            am[val.j][val.i] = 1
 
+        self.adjacencyMatrix = am
         return randomizationCount
 
 
     def getWeightAM(self):
-        am=self.adjacencyMatrix
-        edges=self.edges
-
+        am = self.adjacencyMatrix
+        edges = self.edges
         for edge in edges:
-            s=edge.i
-            d=edge.j
-            w=edge.weight
-            am[s][d]=w
-            am[d][s]=w
-        print("\nMacierz sasiedztwa z wagami",am,"\n\n")
+            s = edge.i
+            d = edge.j
+            w = edge.weight
+            am[s][d] = w
+            am[d][s] = w
+        print("\nMacierz sasiedztwa z wagami", am, "\n\n")
         return am
 
 
@@ -187,9 +183,3 @@ class Graph:
                     temp_list[x].append(y + 1)
                     temp_list[y].append(x + 1)
         return temp_list
-
-
-
-
-
-    
