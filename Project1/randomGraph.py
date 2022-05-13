@@ -3,7 +3,7 @@ import random as r
 def emptyMatrix(n,l):
     matrix=[]
     for i in range(n):
-        help=[0 for i in range(n)]
+        help=[0 for i in range(l)]
         matrix.append(help)
     return matrix
 

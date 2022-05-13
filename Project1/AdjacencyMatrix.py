@@ -1,5 +1,6 @@
 import AdjacencyList as AL
 import IncidenceMatrix as IM
+
 class AdjacencyMatrix:
 
     def __init__(self, listMatrix):
