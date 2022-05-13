@@ -189,19 +189,7 @@ class Graph:
         return temp_list
 
 
-    def get_neighbours(self, node_id: int):
-        all_neighbours_list = self.adj_to_list(self.adjacencyMatrix)
-        node_neighbours_list = all_neighbours_list[node_id]
-        node_neighbours_list = list(map(lambda x: x - 1, node_neighbours_list))
-        return node_neighbours_list
 
-
-    def get_edge_weight(self, node_start: int, node_end: int):
-        for edge in self.edges:
-            if edge.i == node_start and edge.j == node_end:
-                return edge.weight
-            if edge.i == node_end and edge.j == node_start:
-                return edge.weight
 
 
     
