@@ -43,7 +43,7 @@ class Sequence:
                 seq_copy[i] += - 1
             del seq_copy[0]
 
-def sequenceToAdjacencyMatrixAndList(self):
+    def sequenceToAdjacencyMatrixAndList(self):
 
         deg_seq=copy.copy(self.seq)
         n = len(self.seq)
@@ -71,9 +71,9 @@ def sequenceToAdjacencyMatrixAndList(self):
 
 
         adjacencyMatrix = AdjacencyMatrix(matrix)
-        adjacencyList = AdjacencyList(adjacencyMatrix.convertToAL())
+        adjacencyList = AdjacencyList(adjacencyMatrix.convertToAL().adjList)
 
-        print("Lista sasiedztwa: ", adjacencyMatrix.convertToAL())
-        print("Macierz sąsiedztwa: ", matrix)
+        adjacencyList.print()
+        adjacencyMatrix.print()
 
         return adjacencyMatrix, adjacencyList

@@ -21,7 +21,6 @@ if __name__ == '__main__':
     #seq=[4, 4, 3, 1, 2]
 
     sequence = Sequence(fr.readSequence("sequence.txt"))
-
     print("Wpisana sekwencja", sequence)
     print("Czy zadany ciag graficzny moze reprezentowac graf?", sequence.ifSequenceIsGraph())
 
@@ -55,26 +54,30 @@ if __name__ == '__main__':
     adjacencyList = AdjacencyList(fr.readMatrix("../Project1/adjacencyList.txt"))
     adjList = {int(i + 1): adjacencyList.adjList[i][:] for i in range(len(adjacencyList.adjList))}
     print(f"Lista sasiedztwa: {adjList}\n")
-
     components = get_components(adjList)
+    components = get_dict_from_components(components)
     print_components(components)
     print(f"Najwieksza spojna skladowa ma numer: {get_greatest_component_index(components)}\n")
 
 
     # zad4------
     print('-----zad4-----')
-    euler_cycle = generate_euler_graph(10)
+    adjacencyList = generate_euler_graph(10)
+    g = Graph(0, None, 0, adjacencyList)
+    euler_cycle = get_euler_cycle(adjacencyList)
     print('Cykl Eulera: ', euler_cycle)
+    g.drawGraph()
+
 
      # zad5------
-    
+
     print('-----zad5-----')
     adjacencyList = AdjacencyList(randomK_RegularGraph())
     print('k-regularny graf: ')
     adjacencyList.print()
     g = Graph(0, None, 0, adjacencyList)
     g.drawGraph()
-    
+
     # zad6------
 
     print('-----zad6-----')
