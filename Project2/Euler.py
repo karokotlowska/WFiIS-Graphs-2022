@@ -1,11 +1,11 @@
 import random
 import AdjacencyMatrix as AM
-
+from Graph import *
 from Components import *
 from Sequence import *
 
 
-def NextNode(adj_list, currentNode):
+def get_next_node(adj_list, currentNode):
     if len(adj_list[currentNode-1]) == 0:
         return None
 
@@ -25,20 +25,26 @@ def NextNode(adj_list, currentNode):
 
 
 def generate_euler_graph(number_of_vertices):
-    # kazdy wierzcholek powinien byc parzystego stopnia
+    print("Graf Eulera: ")
     even = [i for i in range(2, number_of_vertices, 2)]
     vertice_deg = [random.choice(even) for i in range(1, number_of_vertices + 1)]
 
     while not Sequence.ifSequenceIsGraph(Sequence(vertice_deg)):
         vertice_deg = [random.choice(even) for i in range(1, number_of_vertices + 1)]
+    vertice_deg.sort(reverse=True)
+    print(vertice_deg)
+    seq = Sequence(vertice_deg)
+    print("Czy sekwencja jest grafem?", seq.ifSequenceIsGraph())
+    adjacencyMatrix, adjacencyList = Sequence.sequenceToAdjacencyMatrixAndList(seq)
+    return adjacencyList
 
-    adjacencyMatrix = AM.AdjacencyMatrix(Sequence.sequenceToAdjacencyMatrix(Sequence(vertice_deg)).adjMatrix)
-    adjacencyList = adjacencyMatrix.convertToAL()
 
+def get_euler_cycle(adjacencyList):
+    adjacencyList.print()
     currentNode = 1
     eulerCycleList = [currentNode]
     while True:
-        currentNode=NextNode(adjacencyList.adjList, currentNode)
+        currentNode=get_next_node(adjacencyList.adjList, currentNode)
         if currentNode != None:
             eulerCycleList.append(currentNode)
         else:

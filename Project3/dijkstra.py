@@ -12,7 +12,7 @@ def dijkstra(w, s):
     d_s = [0] * n
     p_s = [0] * n
 
-'''initialize'''
+    '''initialize'''
     for i in range(n):
         d_s[i] = math.inf
         p_s[i] = None

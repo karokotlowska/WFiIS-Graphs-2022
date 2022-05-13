@@ -8,10 +8,7 @@ def get_components(adjList):
             nr = nr + 1
             comp[node-1] = nr
             components_r(nr, node, adjList, comp)
-    components = { i: [] for i in comp }
-    for i in range(len(comp)):
-        components[comp[i]].append(i+1)
-    return components
+    return comp
 
 def components_r(nr, v, adjList, comp):
     for node in adjList[v]:
@@ -19,10 +16,17 @@ def components_r(nr, v, adjList, comp):
             comp[node-1] = nr
             components_r(nr, node, adjList, comp)
 
+def get_dict_from_components(comp):
+    components = { i: [] for i in comp }
+    for i in range(len(comp)):
+        components[comp[i]].append(i+1)
+    return components
+
 def print_components(components):
     print("Lista spojnych skladowych:")
     for key, value in components.items():
         print(f"{key}) " + " ".join(map(str, value)))
+
 
 def get_greatest_component_index(components):
     max = 0
