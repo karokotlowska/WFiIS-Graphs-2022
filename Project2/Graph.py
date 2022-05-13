@@ -62,6 +62,16 @@ class Graph:
         canvas = tk.Canvas(root, height=600, width=600, bg="white")
         diff_angle = 2 * math.pi / len(self.adjacencyMatrix)
 
+        am = self.adjacencyMatrix
+        edges = self.edges
+
+        for edge in edges:
+            s = edge.i
+            d = edge.j
+            w = edge.weight
+            am[s][d] = w
+            am[d][s] = w
+
         for i in range(len(self.adjacencyMatrix)):
             angle_circle = i * diff_angle
             x_circle = 300 + 200 * math.sin(angle_circle)
@@ -97,7 +107,7 @@ class Graph:
                                             abs(x_circle + x_neighbour) / 2 + 20, abs(y_circle + y_neighbour) / 2 + 20,
                                             fill="blue")
                     canvas.create_text(abs(x_circle + x_neighbour) / 2 + 10, abs(y_circle + y_neighbour) / 2 + 10,
-                                       text=str(self.edges[i].weight))
+                                       text=str(am[i][neighbour_id]))
                 neighbour_id += 1
 
         canvas.pack()
