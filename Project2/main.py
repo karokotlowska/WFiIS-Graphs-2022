@@ -15,18 +15,14 @@ from Hamilton import checkHamilton
 
 if __name__ == '__main__':
 
+    # zad1------
     print('\n\n-----zad1-----PRZYKLAD CIAGU GRAFICZNEGO')
-
-    #seq = [6,6,6,6,6,4,4,2]
-    #seq=[4, 4, 3, 1, 2]
-
     sequence = Sequence(fr.readSequence("sequence.txt"))
     print("Wpisana sekwencja", sequence)
     print("Czy zadany ciag graficzny moze reprezentowac graf?", sequence.ifSequenceIsGraph())
 
     '''adjacency matrix and adjacency list from sequence'''
     adjacencyMatrix, adjacencyList = sequence.sequenceToAdjacencyMatrixAndList()
-
     g = Graph(0, None, 0, adjacencyList)
 
     if sequence.ifSequenceIsGraph() is False:
@@ -34,14 +30,14 @@ if __name__ == '__main__':
     else:
         g.drawGraph()
 
-
+    # zad1------
     print('\n\n-----zad1-----PRZYKLAD CIAGU NIEGRAFICZNEGO')
-
     sequence2 = Sequence(fr.readSequence("sequence2.txt"))
     print("Wpisana sekwencja", sequence2)
     print("Czy zadany ciag graficzny moze reprezentowac graf?", sequence2.ifSequenceIsGraph())
 
 
+    # zad2------
     print('\n\n-----zad2-----')
     g = Graph(0, None, 0, adjacencyList)
     randomizationTimes = g.randomize(10)
