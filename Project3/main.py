@@ -18,7 +18,7 @@ if __name__ == '__main__':
     probability=0.5
     graph=Graph(vertices,None,probability,None)
     graph.generateRandomWeighted()
-    graph.drawWeightGraph()
+
 
     print('------zad2------ dijkstra')
 
