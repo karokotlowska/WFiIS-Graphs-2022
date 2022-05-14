@@ -11,72 +11,62 @@ def checkInput(n , k):
         return False
     return True
 
-def isRegular(lista, n, k):
-    for i in lista:
-        if len(i) != k:
-            return False
-
-    numberOfPassed = 0
-    a = 1
-    
-    while True:
-        for i in range(len(lista[a - 1])):
-            if lista[a - 1][i] != None:
-                b = lista[a - 1][i]
-                lista[a - 1][i] = None
-                index = lista[b - 1].index(a)
-                lista[b - 1][index] = None
-                numberOfPassed += 1
-                a = b
-                break
-        else:
-            break
-
-    if numberOfPassed == n:
-        return True
-    else: 
-        return False
-
-        
-      
+          
 def randomK_RegularGraph(n = 7, k = 2):
     if not checkInput(n, k):
         sys.exit(-1)
     
     adjList = [[] for i in range(n)]
+
+    if k == 0:
+        return adjList
+    degree = [k for i in range(n)]
     iterator = 0
-    numberOfPairs = 0
 
     while True:
-        if numberOfPairs == n and isRegular(deepcopy(adjList), n , k) :
-            return adjList
-
-        if iterator > 1000:
-            iterator = 0
-            numberOfPairs = 0
-            adjList.clear()
-            adjList = [[] for i in range(n)]
-
-        iterator += 1
 
         v1, v2 = randint(1, n), randint(1, n)
 
         while v1 == v2:
             v2 = randint(1, n)
-        
-        if len(adjList[v1 - 1]) == k or len(adjList[v2 - 1]) == k:
-            continue
 
-        if v2 in adjList[v1 - 1]:
-            continue
+        if sum(degree) == 4 and max(degree) == 2:
+            T = sorted(degree, reverse = True)
 
-        adjList[v1 - 1].append(v2)
-        adjList[v2 - 1].append(v1)
+            if T[1] == 1:
+                v1 = degree.index(max(degree)) + 1 
+                v2 = degree.index(1) + 1 
+                fillGraph(v1, v2, adjList, degree)
 
-        numberOfPairs += 1
+  
+                v1 = degree.index(1) + 1 
+                v2 = degree.index(1, v1) + 1 
+                fillGraph(v1, v2, adjList, degree)
 
+                
+        if v1 not in adjList[v2 - 1] and v2 not in adjList[v1 - 1] and degree[v1 - 1] > 0 and degree[v2 - 1] > 0:
+            fillGraph(v1, v2, adjList, degree)
 
-      
+            
+        if sum(degree) == 0:
+            break
+
+        iterator = iterator + 1
+        if iterator >= 500:
+
+            adjList.clear()
+            tempAdjList = [ [] for i in range(n)]
+            adjList = tempAdjList
+            tempDegree = [k for i in range(n)]
+            degree = tempDegree
+            iterator = 0
+
     
+    return adjList
 
 
+def fillGraph(v1, v2, adjList, degree):
+    adjList[v1 - 1].append(v2)
+    adjList[v2 - 1].append(v1)
+    degree[v1 - 1] = degree[v1 - 1] - 1
+    degree[v2 - 1] = degree[v2 - 1] - 1       

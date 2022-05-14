@@ -1,9 +1,14 @@
-def checkHamilton(adjcencyMatrix, startVertex):
+def checkHamilton(adjcencyMatrix):
     n =  len(adjcencyMatrix.adjMatrix)
     cycle = []
     visitedVertexes = [False] * n
     checked = [False] * n
-    return cycleHamilton(adjcencyMatrix.adjMatrix, startVertex, visitedVertexes, cycle)
+    for i in range(n):
+        if cycleHamilton(adjcencyMatrix.adjMatrix, i, visitedVertexes, cycle):
+            print('cykl Hamiltona: ', [x + 1 for x in cycle] )
+            return True
+    
+    return False
 
      
     
