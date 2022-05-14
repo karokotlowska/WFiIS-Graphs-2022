@@ -68,7 +68,7 @@ if __name__ == '__main__':
      # zad5------
 
     print('-----zad5-----')
-    adjacencyList = AdjacencyList(randomK_RegularGraph())
+    adjacencyList = AdjacencyList(randomK_RegularGraph(16,3))
     print('k-regularny graf: ')
     adjacencyList.print()
     g = Graph(0, None, 0, adjacencyList)
@@ -76,8 +76,19 @@ if __name__ == '__main__':
 
     # zad6------
 
+    # jest 
     print('-----zad6-----')
-    adjacencyList = AdjacencyList(fr.readMatrix('./Hamilton.txt'))
+    adjacencyList = AdjacencyList(fr.readMatrix('./Hamilton1.txt'))
     adjacencyList.print()
-    check = checkHamilton(adjacencyList.convertToAM(), 1)
-    print('czy graf jest hamiltonowski: ', check)
+    print('czy graf jest hamiltonowski: ', checkHamilton(adjacencyList.convertToAM()))
+    print()
+    g = Graph(0, None, 0, adjacencyList)
+    g.drawGraph()
+
+    # nie jest 
+    adjacencyList = AdjacencyList(fr.readMatrix('./Hamilton2.txt'))
+    adjacencyList.print()
+    print()
+    print('czy graf jest hamiltonowski: ', checkHamilton(adjacencyList.convertToAM()))
+    g = Graph(0, None, 0, adjacencyList)
+    g.drawGraph()
