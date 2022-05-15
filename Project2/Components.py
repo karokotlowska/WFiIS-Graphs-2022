@@ -3,10 +3,10 @@ def get_components(adjList):
     comp = []
     for node in adjList:
         comp.append(-1)
-    for node in adjList:
-        if comp[node-1] == -1:
+    for node in range(len(adjList)):
+        if comp[node] == -1:
             nr = nr + 1
-            comp[node-1] = nr
+            comp[node] = nr
             components_r(nr, node, adjList, comp)
     return comp
 
@@ -14,7 +14,7 @@ def components_r(nr, v, adjList, comp):
     for node in adjList[v]:
         if comp[node-1] == -1:
             comp[node-1] = nr
-            components_r(nr, node, adjList, comp)
+            components_r(nr, node-1, adjList, comp)
 
 def get_dict_from_components(comp):
     components = { i: [] for i in comp }

@@ -48,11 +48,9 @@ if __name__ == '__main__':
     # zad3------
     print('-----zad3-----')
     adjacencyList = AdjacencyList(fr.readMatrix("../Project1/adjacencyList.txt"))
-    adjList = {int(i + 1): adjacencyList.adjList[i][:] for i in range(len(adjacencyList.adjList))}
-    print(f"Lista sasiedztwa: {adjList}\n")
-    components = get_components(adjList)
+    print(f"Lista sasiedztwa: {adjacencyList.adjList}\n")
+    components = get_components(adjacencyList.adjList)
     components = get_dict_from_components(components)
-    print_components(components)
     print(f"Najwieksza spojna skladowa ma numer: {get_greatest_component_index(components)}\n")
 
 
@@ -65,7 +63,7 @@ if __name__ == '__main__':
     g.drawGraph()
 
 
-     # zad5------
+    # zad5------
 
     print('-----zad5-----')
     adjacencyList = AdjacencyList(randomK_RegularGraph(16,3))
