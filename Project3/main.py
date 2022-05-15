@@ -32,3 +32,12 @@ if __name__ == '__main__':
     empty_distance_matrix = DistanceMatrix(len(am_weighted))
     distance_matrix = empty_distance_matrix.fill_distance_matrix(am_weighted)
     distance_matrix.print()
+    print()
+
+    print('------zad4------ center')
+    center_vertices, min_distance = distance_matrix.get_center_vertices()
+    print(f'Centrum = {center_vertices} (suma odleglosci: {min_distance})')
+
+    center_minimax, minimax = distance_matrix.get_center_minimax(am_weighted)
+    print(f'Centrum minimax = {center_minimax} (odleglosc od najdalszego: {minimax})')
+    print()
