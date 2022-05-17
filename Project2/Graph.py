@@ -127,7 +127,8 @@ class Graph:
 
 
     def randomize(self, n=1):
-        randomizationCount = False
+
+        nodes = len(self.adjacencyMatrix)
 
         listOfEdges = []
 
@@ -139,26 +140,29 @@ class Graph:
                     edge = Edge(i, j)
                     listOfEdges.append(edge)
 
+        randomizationCount = 0
+
         while n > 0:
-            x = random.randint(0, len(listOfEdges) - 1)
-            y = random.randint(0, len(listOfEdges) - 1)
-            nodesFirstPair: list = [listOfEdges[x].i, listOfEdges[x].j]
-            nodesSecondPair: list = [listOfEdges[y].i, listOfEdges[y].j]
+            x = random.randint(0, nodes - 1)
+            y = random.randint(0, nodes - 1)
             edge1 = Edge(listOfEdges[x].i, listOfEdges[y].j)
             edge2 = Edge(listOfEdges[y].i, listOfEdges[x].j)
-            if edge1 not in listOfEdges and edge2 not in listOfEdges and len(nodesFirstPair) == len(
-                    set(nodesFirstPair)) and len(nodesSecondPair) == len(set(nodesSecondPair)):
-                listOfEdges[x].j, listOfEdges[y].j = listOfEdges[y].j, listOfEdges[x].j
-                n -= 1
-                randomizationCount += 1
+            if (x != y and am[x][y] == am[x][y] and am[x][y] == 1):
+                a, b = listOfEdges[x].i, listOfEdges[x].j
+                c, d = listOfEdges[y].i, listOfEdges[y].j
+                if (a != d and b != c and am[a][d] == 0 and am[b][c] == 0 and edge1 not in listOfEdges and edge2 not in listOfEdges):
+                    listOfEdges[x].j, listOfEdges[y].j = listOfEdges[y].j, listOfEdges[x].j
+            n -= 1
+            randomizationCount += 1
 
-        am = [[0]*len(am) for _ in range(len(am))]
+        am2 = [[0] * len(am) for _ in range(len(am))]
 
         for val in listOfEdges:
-            am[val.i][val.j] = 1
-            am[val.j][val.i] = 1
+            am2[val.i][val.j] = 1
+            am2[val.j][val.i] = 1
 
-        self.adjacencyMatrix = am
+        self.adjacencyMatrix = am2
+
         return randomizationCount
 
 
