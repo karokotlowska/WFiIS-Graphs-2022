@@ -1,5 +1,7 @@
 import random as r
 
+from numpy import mat
+
 def emptyMatrix(n,l):
     matrix=[]
     for i in range(n):
@@ -18,7 +20,13 @@ def randomGraphWithProbability(n,p):
     return matrix
 
 def randomGraphwithNumberOfEdges(n,l):
+    
     matrix=emptyMatrix(n,n)
+
+    if l>(n*n-n)/2:
+        print("Nie mozna utworzyc tyle krawedzi, zwracam pusta macierz")
+        return matrix
+
     counter=0
     while counter<l:
         i=r.randint(0,n-1)
