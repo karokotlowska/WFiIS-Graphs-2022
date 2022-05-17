@@ -40,7 +40,7 @@ if __name__ == '__main__':
     # zad2------
     print('\n\n-----zad2-----')
     g = Graph(0, None, 0, adjacencyList)
-    randomizationTimes = g.randomize(10)
+    randomizationTimes = g.randomize(5)
     print("Randomizacja wykonana ", randomizationTimes, " razy\n")
     g.drawGraph()
 
