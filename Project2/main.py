@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     # zad4------
     print('-----zad4-----')
-    adjacencyList = generate_euler_graph(10)
+    adjacencyList = generate_euler_graph(6)
     g = Graph(0, None, 0, adjacencyList)
     euler_cycle = get_euler_cycle(adjacencyList)
     print('Cykl Eulera: ', euler_cycle)
