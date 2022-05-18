@@ -152,8 +152,8 @@ class Graph:
                 c, d = listOfEdges[y].i, listOfEdges[y].j
                 if (a != d and b != c and am[a][d] == 0 and am[b][c] == 0 and edge1 not in listOfEdges and edge2 not in listOfEdges):
                     listOfEdges[x].j, listOfEdges[y].j = listOfEdges[y].j, listOfEdges[x].j
+                    randomizationCount += 1
             n -= 1
-            randomizationCount += 1
 
         am2 = [[0] * len(am) for _ in range(len(am))]
 
