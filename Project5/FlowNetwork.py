@@ -7,6 +7,7 @@ def bfs(source, target, path, matrix):
         visited[source] = True
         q = cs.deque([])
         q.append(source)
+        print(path)
 
         while q:
             u = q.popleft()
@@ -136,14 +137,12 @@ class FlowNetwork:
 
 
         '''creating adjacency matrix'''
-        adjacencyMatrix = [[0] * (vertice_number ) for _ in range(vertice_number +1)]
+        adjacencyMatrix = [[0] * (vertice_number ) for _ in range(vertice_number)]
 
         for val in edges:
             adjacencyMatrix[ val[0] ][ val[1] ] = val[2]
 
-        #[val[0]][val[1]]
-
         for i in adjacencyMatrix:
             print(i)      
       
-        return adjacencyMatrix
+        return adjacencyMatrix, vertice_number
