@@ -29,13 +29,13 @@ def kosaraju(adjMatrix):
         scc.append([])
         dfsSprint(vertex, visited, tAdjMatrix, scc[cn - 1])
 
-    print(scc)
+    return scc
 
         
 
 def dfsSprint(vertex, visited, adjMatrix, scc):
     visited[vertex] = True
-    scc.append(vertex + 1)
+    scc.append(vertex)
 
     for i in range(len(adjMatrix[vertex])):
         if adjMatrix[vertex][i] == 1 and visited[i] == False: 
