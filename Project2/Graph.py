@@ -1,3 +1,4 @@
+from copy import deepcopy
 import random
 import math
 import networkx as nx
@@ -187,3 +188,4 @@ class Graph:
                     temp_list[x].append(y + 1)
                     temp_list[y].append(x + 1)
         return temp_list
+

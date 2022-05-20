@@ -1,7 +1,12 @@
 from itertools import count
 
+from AdjacencyMatrix import AdjacencyMatrix
+from DirectedGraph import DirectedGraph
 
-def kosaraju(adjMatrix):
+
+def kosaraju(directedGraph: DirectedGraph):
+
+    adjMatrix=directedGraph.getAdjecencyMatrixRepresentation()
 
     n = len(adjMatrix)
     stack = []

@@ -2,51 +2,47 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'../Project1')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'../Project2')))
-from Graph import *
-from RandomDirecredGraph import *
+
+from AdjacencyList import AdjacencyList
+from AdjacencyMatrix import AdjacencyMatrix
+from DirectedGraph import DirectedGraph
 import fileReader as fr
 from Kosaraju import kosaraju
 from BellmanFord import randWeights, bellmanFord
 
 '''Zad1 - Direcred Graph and Random Directed Graph'''
-matrix1=randomDirectedGraph(7,0.3)
-# matrix2=fr.readMatrix('directedGraphExample1.txt')
-print('-----zad1-----losowy graf skierowany')
-for row in matrix1:
-    print(row)
+print('\n\n-----zad1-----losowy graf skierowany \n\n')
+directedGraphRandom=DirectedGraph.randomDirectedGraph(5,0.5)
+directedGraphRandom.printAdjecencyMatrixGraph()
+print('\n\n-----zad1-----przykladowy graf skierowany \n\n')
+matrix=fr.readMatrix('directedGraphExample1.txt')
+directedGraph=DirectedGraph(0,None,0,AdjacencyMatrix(matrix).convertToAL())
+directedGraph.printAdjecencyMatrixGraph()
 
-# ------------ zad 2
 print('\n\n-----zad2-----wyszukiwanie silnie spojnych skladowych dla losowego digrafu')
-scc = kosaraju(matrix1)
+scc = kosaraju(directedGraphRandom)
 print([[i + 1 for i in j]for j in scc])
 
 
-# ------------ zad 3
 print('\n\n-----zad3-----')
-print('losowy silnie spojny digraf: ')
+print('Silnie spojny digraf: ')
 
-matrix2=randomDirectedGraph(4,0.6)
-
-for row in matrix2:
-    print(row)
-
-scc = kosaraju(matrix2)
+directedGraph.printAdjecencyMatrixGraph()
+scc = kosaraju(directedGraph)
 
 print('\nsprawdzenie silnie spojnej skladowej: ')
 print([[i + 1 for i in j]for j in scc])
 
-
-wMatrix = randWeights(matrix2)
+directedGraph.generateDirectedEdgesFromList(directedGraph.getWeightsFromFile('exampleWeights.txt'))
 
 print('\nMacierz wag: ')
-for row in wMatrix:
+weightMatrix=directedGraph.generateWeightMatrix()
+for row in weightMatrix:
     print(row)
+
 print()
-indicator, d, p = bellmanFord(wMatrix, 1 , matrix2)
+indicator, d, p = bellmanFord(weightMatrix, 1 , directedGraph.getAdjecencyMatrixRepresentation())
 print('W grafie jest cykl o ujemnej wadze: ', not indicator)
 print(d)
 print(p)
-
 #najkrotsza sciezka (algorytm Bellmana-Forda)
-
-
