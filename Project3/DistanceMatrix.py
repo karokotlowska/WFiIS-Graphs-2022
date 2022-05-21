@@ -2,13 +2,13 @@ from dijkstra import *
 class DistanceMatrix:
     def __init__(self, size):
         self.size = size
-        self.distMatrix = [[0 for _ in range(size)] for _ in range(size)]
+        self.distMatrix = [[0 for i in range(size)] for j in range(size)]
 
     def fill_distance_matrix(self, am_weighted):
         for i in range(self.size):
-            row_to_append, p_s = dijkstra(am_weighted, i)
+            d_s, p_s = dijkstra(am_weighted, i)
             for j in range(self.size):
-                self.distMatrix[i][j] = row_to_append[j]
+                self.distMatrix[i][j] = d_s[j]
         return self
 
     def print(self):
@@ -16,7 +16,7 @@ class DistanceMatrix:
         for row in self.distMatrix:
             print(row)
 
-    def get_center_vertices(self):
+    def get_center(self):
         min_distance = math.inf
         center = 0
         for x in range(self.size):
@@ -26,15 +26,17 @@ class DistanceMatrix:
             if sum < min_distance:
                 min_distance = sum
                 center = x
+        center += 1
         return center, min_distance
 
     def get_center_minimax(self, weighted_am):
         min_distance = math.inf
         center = 0
-        for i in range(self.size):
-            d, s = dijkstra(weighted_am, i)
-            max_distance = max(d)
+        for x in range(self.size):
+            d_s, p_s = dijkstra(weighted_am, x)
+            max_distance = max(d_s)
             if max_distance < min_distance:
                 min_distance = max_distance
-                center = i
+                center = x
+        center += 1
         return center, min_distance

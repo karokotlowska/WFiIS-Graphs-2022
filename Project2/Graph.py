@@ -114,10 +114,19 @@ class Graph:
         canvas.pack()
         root.mainloop()
 
+    def isGraphConsistent(self, am):
+        for row in am:
+            if max(row) == 0:
+                return False
+        return True
 
     def generateRandomWeighted(self):
         self.adjacencyMatrix = randomGraph.randomGraphWithProbability(self.vertices, self.probability)
+        while self.isGraphConsistent(self.adjacencyMatrix) == False:
+            self.adjacencyMatrix = randomGraph.randomGraphWithProbability(self.vertices, self.probability)
         print(f"Losowo wygenerowany graf (macierz sasiedztwa): {self.adjacencyMatrix}\n")
+
+
         for i in range(0, len(self.adjacencyMatrix)):
             for j in range(0, i):
                 if self.adjacencyMatrix[i][j] == 1:

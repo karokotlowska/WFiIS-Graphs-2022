@@ -35,7 +35,7 @@ if __name__ == '__main__':
     print()
 
     print('------zad4------ center')
-    center_vertices, min_distance = distance_matrix.get_center_vertices()
+    center_vertices, min_distance = distance_matrix.get_center()
     print(f'Centrum = {center_vertices} (suma odleglosci: {min_distance})')
 
     center_minimax, minimax = distance_matrix.get_center_minimax(am_weighted)
