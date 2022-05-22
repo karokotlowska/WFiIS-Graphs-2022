@@ -105,8 +105,7 @@ class Graph:
                     x_neighbour = 300 + 200 * math.sin(angle_neighbour)
                     y_neighbour = 300 - 200 * math.cos(angle_neighbour)
                     canvas.create_rectangle(abs(x_circle + x_neighbour) / 2, abs(y_circle + y_neighbour) / 2,
-                                            abs(x_circle + x_neighbour) / 2 + 20, abs(y_circle + y_neighbour) / 2 + 20,
-                                            fill="blue")
+                                            abs(x_circle + x_neighbour) / 2 + 20, abs(y_circle + y_neighbour) / 2 + 20)
                     canvas.create_text(abs(x_circle + x_neighbour) / 2 + 10, abs(y_circle + y_neighbour) / 2 + 10,
                                        text=str(am[i][neighbour_id]))
                 neighbour_id += 1
