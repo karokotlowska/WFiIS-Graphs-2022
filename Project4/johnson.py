@@ -1,12 +1,14 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'../Project1')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'../Project3')))
 
 import BellmanFord as BF
 from DirectedGraph import DirectedGraph
 from Vertex import Vertex
 from DirectedEdge import DirectedEdge
 from randomGraph import emptyMatrix
+from dijkstra import dijkstra
 
 '''
 Method
@@ -31,10 +33,20 @@ def add_s(graph: DirectedGraph) ->DirectedGraph:
 
     return graphCopy
 
-def copyWeights(sourceGraph,destGraph):
-    
+def copyWeights(sourceGraph: DirectedGraph,destGraph: DirectedGraph)->None:
+    for edge in sourceGraph.getListOfEdges():
+        beginVertexId=edge.getBeginVertex().getVertexId()
+        endVertexId = edge.getEndVertex().getVertexId()
+        weight=edge.getWeight()
+        seekedEdge = destGraph.findDirectedEdge(beginVertexId, endVertexId)
+        if seekedEdge is not None:
+            seekedEdge.setWeight(weight)
 
-def johnson(graph) -> list[list[int]] or None:
+
+
+
+
+def johnson(graph: DirectedGraph) -> list[list[int]] or None:
 
     newGraph = add_s(graph)
     vertices = [vertex.getVertexId() for vertex in newGraph.getListOfVertices()]
@@ -50,7 +62,7 @@ def johnson(graph) -> list[list[int]] or None:
 
     h=[0 for i in range(len(vertices))]
     for vertexId in vertices:
-        h[vertexId] = d[vertex]
+        h[vertexId] = d[vertexId]
 
     for edge in newGraph.getListOfEdges():
         beginVertexId = edge.getBeginVertex().getVertexId()
@@ -58,8 +70,16 @@ def johnson(graph) -> list[list[int]] or None:
         weight=edge.getWeight()
         edge.setWeight(weight + h[beginVertexId] - h[endVertexId])
 
+    copyWeights(newGraph,graph)
 
-
+    n=len(graph.getListOfVertices())
+    D=list()
+    oldVertices = [vertex.getVertexId() for vertex in graph.getListOfVertices()]
+    for u in oldVertices:
+        for v in oldVertices:
+            distance, path = dijkstra(graph.generateWeightMatrix(),u)
+            D[u].append(distance - h[u] +h[v])
+    return D
 
     
     

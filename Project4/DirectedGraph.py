@@ -111,12 +111,19 @@ class DirectedGraph(Graph):
 
         return destGraph
 
+    def findDirectedEdge(self,seekedBeginVertexId,seekedEndVertexId)->DirectedEdge or None:
+        for edge in self.getListOfEdges():
+            beginVertexId=edge.getBeginVertex().getVertexId()
+            endVertexId = edge.getEndVertex().getVertexId()
+            if(beginVertexId==seekedBeginVertexId and endVertexId==seekedEndVertexId):
+                return edge
+
+
     def addEgde(self,newEdge:DirectedEdge):
         self.edges.append(newEdge)
 
     def addVertex(self,newVertex:Vertex):
         self.listOfVertices.append(newVertex)
-
 
     def getAdjecencyMatrixRepresentation(self)->list[list[int]]:
         return self.adjacencyMatrix
