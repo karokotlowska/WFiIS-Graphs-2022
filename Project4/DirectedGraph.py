@@ -106,7 +106,7 @@ class DirectedGraph(Graph):
             beginVertex = edge.getBeginVertex()
             endVertex = edge.getEndVertex()
             weight = edge.getWeight()
-            edgeList.append(DirectedEdge(beginVertex,endVertex,weight))
+            edgeList.append(DirectedEdge(beginVertex,endVertex,False,weight))
         destGraph.setListOfEdges(edgeList)
 
         return destGraph

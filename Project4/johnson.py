@@ -31,6 +31,9 @@ def add_s(graph: DirectedGraph) ->DirectedGraph:
 
     return graphCopy
 
+def copyWeights(sourceGraph,destGraph):
+    
+
 def johnson(graph) -> list[list[int]] or None:
 
     newGraph = add_s(graph)
@@ -45,7 +48,18 @@ def johnson(graph) -> list[list[int]] or None:
     if not val:
         raise Exception('Error')
 
-    n=len(graph.getListofVertices())
+    h=[0 for i in range(len(vertices))]
+    for vertexId in vertices:
+        h[vertexId] = d[vertex]
+
+    for edge in newGraph.getListOfEdges():
+        beginVertexId = edge.getBeginVertex().getVertexId()
+        endVertexId = edge.getEndVertex().getVertexId()
+        weight=edge.getWeight()
+        edge.setWeight(weight + h[beginVertexId] - h[endVertexId])
+
+
+
 
     
     
