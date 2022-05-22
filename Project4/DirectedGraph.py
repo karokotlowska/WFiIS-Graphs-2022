@@ -9,16 +9,23 @@ from Graph import *
 from DirectedEdge import *
 from Vertex import *
 from randomGraph import *
-from fileReader import readMatrix
 
 '''
 Class representing DirectedGraph, extends Graph
 '''
 class DirectedGraph(Graph):
 
-    def __init__(self, vertices: int = 0, edges: list = ..., probability: float = 0, adjecencyList: AdjacencyList = None):
-        super().__init__(vertices, edges, probability, adjecencyList)
+    listOfVertices: list[Vertex]
+    listOfEdges: list[DirectedEdge]
 
+    def __init__(self, vertices: int = 0, edges: list = ...,listOfVertices: list=..., probability: float = 0, adjecencyList: AdjacencyList = None):
+        super().__init__(vertices, edges, probability, adjecencyList)
+        if listOfVertices is None:
+            listOfVertices=list()
+            for i in range(len(adjecencyList.adjList)):
+                listOfVertices.append(Vertex(i))
+        self.listOfVertices=listOfVertices
+        self.listOfEdges=edges
 
     ''' Random Directed Graph based on adjecency matrix. 
     Function returns  matrix.'''
@@ -33,7 +40,7 @@ class DirectedGraph(Graph):
         
         adjacencyList=AdjacencyMatrix(matrix).convertToAL()
 
-        return DirectedGraph(0,None,0,adjacencyList)
+        return DirectedGraph(0,None,None,0,adjacencyList)
     
     '''
     Method generates Edges for a DirectedGraph object. Values are random generated
@@ -42,7 +49,12 @@ class DirectedGraph(Graph):
         for i in range(0, len(self.adjacencyMatrix)):
             for j in range(0, len(self.adjacencyMatrix)):
                 if self.adjacencyMatrix[i][j] == 1:
-                    newEdge = DirectedEdge(Vertex(i),Vertex(j),False,random.randint(lowerBoundry,upperBoundry))
+                    beginVertex = Vertex(i)
+                    endVertex = Vertex(j)
+                    weight = 0
+                    while weight == 0:
+                        weight=random.randint(lowerBoundry,upperBoundry)
+                    newEdge = DirectedEdge(Vertex(i),Vertex(j),False,weight)
                     self.edges.append(newEdge)
     
     def getWeightsFromFile(self,filename)->list[int]:
@@ -84,10 +96,27 @@ class DirectedGraph(Graph):
             print(e)
     
     def copy(self):
-        return deepcopy(self)
+        copiedGraph=DirectedGraph()
+        for vertex in self.getListofVertices():
+            copiedGraph.listOfVertices.append(vertex)
+        for edge in self.getListOfEdges():
+            beginVertex = edge.getBeginVertex()
+            endVertex = edge.getEndVertex()
+            weight = edge.getWeight()
+            copiedGraph.listOfEdges.append(DirectedEdge(beginVertex,endVertex,weight))
+        return copiedGraph
+
+    def addEgde(self,newEdge:DirectedEdge):
+        self.listOfEdges.append(newEdge)
 
     def getAdjecencyMatrixRepresentation(self)->list[list[int]]:
         return self.adjacencyMatrix
+
+    def getListofVertices(self)->list[Vertex]:
+        return self.listOfVertices
+
+    def getListOfEdges(self)->list[DirectedEdge]:
+        return self.listOfEdges
 
         
         
