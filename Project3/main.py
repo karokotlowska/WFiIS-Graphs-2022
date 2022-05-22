@@ -6,10 +6,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'../Proje
 
 import fileReader as fr
 import AdjacencyList as AL
+import AdjacencyMatrix as AM
 from Sequence import Sequence
 from Graph import Graph
 from dijkstra import dijkstra, print_dijkstra
 from DistanceMatrix import *
+from Prima import *
 
 
 if __name__ == '__main__':
@@ -19,7 +21,7 @@ if __name__ == '__main__':
     probability=0.5
     graph=Graph(vertices,None,probability,None)
     graph.generateRandomWeighted()
-    graph.drawWeightGraph()
+    #graph.drawWeightGraph()
 
     print('------zad2------ dijkstra')
 
@@ -33,6 +35,7 @@ if __name__ == '__main__':
     distance_matrix = empty_distance_matrix.fill_distance_matrix(am_weighted)
     distance_matrix.print()
     print()
+    
 
     print('------zad4------ center')
     center_vertices, min_distance = distance_matrix.get_center()
@@ -41,3 +44,15 @@ if __name__ == '__main__':
     center_minimax, minimax = distance_matrix.get_center_minimax(am_weighted)
     print(f'Centrum minimax = {center_minimax} (odleglosc od najdalszego: {minimax})')
     print()
+    graph.drawWeightGraph()
+
+    print('------zad5------ Prima')
+    graph=Graph(vertices,None,probability,None)
+    graph.generateRandomWeighted()
+    graph.drawWeightGraph()
+    in_matrix = graph.adjacencyMatrix
+    res_matrix = prima(in_matrix)
+    graph1 = Graph(vertices,None,probability, None)
+    graph1.adjacencyMatrix = res_matrix
+    graph1.drawWeightGraph()
+
