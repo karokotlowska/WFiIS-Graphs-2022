@@ -124,8 +124,8 @@ class Graph:
         self.adjacencyMatrix = randomGraph.randomGraphWithProbability(self.vertices, self.probability)
         while self.isGraphConsistent(self.adjacencyMatrix) == False:
             self.adjacencyMatrix = randomGraph.randomGraphWithProbability(self.vertices, self.probability)
+            
         print(f"Losowo wygenerowany graf (macierz sasiedztwa): {self.adjacencyMatrix}\n")
-
 
         for i in range(0, len(self.adjacencyMatrix)):
             for j in range(0, i):
