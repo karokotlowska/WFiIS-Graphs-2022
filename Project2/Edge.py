@@ -5,4 +5,4 @@ class Edge:
         self.weight = weight
 
     def __str__(self):
-        return f"i: {self.i}, j: {self.j} waga: {self.weight}"
+        return f"i: {self.i+1}, j: {self.j+1}, weigth: {self.weight}"
