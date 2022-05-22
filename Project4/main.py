@@ -52,3 +52,25 @@ print(p)
 print('\n\n\n-------Zad 4 ------- Algorytm Johnsona')
 
 distanceMatrix=johnson(directedGraph)
+'''
+matrix=[]
+matrix.append([2])
+matrix.append([4,5])
+matrix.append([1,2])
+matrix.append([5,6])
+matrix.append([3,6])
+matrix.append([1,3])
+
+adjecencyList=AdjacencyList(matrix)
+
+
+directedGraph2=DirectedGraph(0,None,None,0,adjecencyList)
+
+directedGraph2.generateDirectedEdgesFromList(directedGraph2.getWeightsFromFile('exampleWeights1.txt'))
+
+val, d, p =bellmanFord(directedGraph2.generateWeightMatrix(),
+                       1,
+                       directedGraph2.getAdjecencyMatrixRepresentation()
+                       )
+print('elo')
+'''
