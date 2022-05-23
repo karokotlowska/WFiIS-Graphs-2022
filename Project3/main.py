@@ -51,8 +51,9 @@ if __name__ == '__main__':
     graph.generateRandomWeighted()
     graph.drawWeightGraph()
     in_matrix = graph.adjacencyMatrix
-    res_matrix = prima(in_matrix)
+    res_matrix = primsMst(in_matrix)
     graph1 = Graph(vertices,None,probability, None)
     graph1.adjacencyMatrix = res_matrix
+    graph.drawWeightGraph()
     graph1.drawWeightGraph()
 
