@@ -6,7 +6,7 @@ class DistanceMatrix:
 
     def fill_distance_matrix(self, am_weighted):
         for i in range(self.size):
-            d_s, p_s = dijkstra(am_weighted, i)
+            d_s, p_s = dijkstra(am_weighted, i,am_weighted)
             for j in range(self.size):
                 self.distMatrix[i][j] = d_s[j]
         return self
@@ -33,7 +33,7 @@ class DistanceMatrix:
         min_distance = math.inf
         center = 0
         for x in range(self.size):
-            d_s, p_s = dijkstra(weighted_am, x)
+            d_s, p_s = dijkstra(weighted_am, x,weighted_am)
             max_distance = max(d_s)
             if max_distance < min_distance:
                 min_distance = max_distance

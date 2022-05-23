@@ -52,3 +52,5 @@ print(p)
 print('\n\n\n-------Zad 4 ------- Algorytm Johnsona')
 
 distanceMatrix=johnson(directedGraph)
+for row in distanceMatrix:
+    print(row)

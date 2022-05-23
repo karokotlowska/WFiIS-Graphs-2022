@@ -7,7 +7,7 @@ def relax(u, v, w, d_s, p_s):
         p_s[v] = u
 
 
-def dijkstra(w, s):
+def dijkstra(w, s,adjmatrix):
     n = len(w)
     d_s = [0] * n
     p_s = [0] * n
@@ -28,18 +28,19 @@ def dijkstra(w, s):
         not_ready.remove(u)
 
         for v in not_ready:
-            if w[u][v] != 0:
+            if adjmatrix[u][v] != 0:
                 relax(u, v, w, d_s, p_s)
     return d_s, p_s
 
 
 def print_dijkstra(d_s, p_s, s):
-    print(f'START: s = {s + 1}\n')
+    s+=1
+    print('Start: s =', s, '\n')
     for i in range(len(d_s)):
-        j = int(i)
-        path = []
+        j = i
+        shortestpath = []
         while j is not None and j >= 0:
-            path.append(j + 1)
+            shortestpath.append(j + 1)
             j = p_s[j]
-        path.reverse()
-        print(f'd({i + 1}) = {d_s[i]} => [{" - ".join(map(str, path))}]\n')
+        shortestpath.reverse()
+        print(f'd({i + 1}) = {d_s[i]} => [{" - ".join(map(str, shortestpath))}]\n')

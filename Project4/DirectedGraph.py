@@ -5,6 +5,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'../Project2')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'../Project1')))
 
+from AdjacencyList import *
 from Graph import *
 from DirectedEdge import *
 from Vertex import *
@@ -16,7 +17,6 @@ Class representing DirectedGraph, extends Graph
 class DirectedGraph(Graph):
 
     listOfVertices: list[Vertex]
-    listOfEdges: list[DirectedEdge]
 
     def __init__(self, vertices: int = 0, edges: list = ...,listOfVertices: list=..., probability: float = 0, adjecencyList: AdjacencyList = None):
         super().__init__(vertices, edges, probability, adjecencyList)
@@ -25,7 +25,6 @@ class DirectedGraph(Graph):
             for i in range(len(adjecencyList.adjList)):
                 listOfVertices.append(Vertex(i))
         self.listOfVertices=listOfVertices
-        self.listOfEdges=edges
 
     ''' Random Directed Graph based on adjecency matrix. 
     Function returns  matrix.'''
@@ -76,7 +75,7 @@ class DirectedGraph(Graph):
 
 
     def generateWeightMatrix(self)->list[list[int]]:
-        length=len(self.adjacencyMatrix)
+        length=len(self.getListOfVertices())
         weightMatrix=emptyMatrix(length,length)
         for edge in self.edges:
             beginIndex=edge.getBeginVertex().getVertexId()
@@ -95,28 +94,51 @@ class DirectedGraph(Graph):
         for e in self.edges:
             print(e)
     
-    def copy(self):
-        copiedGraph=DirectedGraph()
-        for vertex in self.getListofVertices():
-            copiedGraph.listOfVertices.append(vertex)
+    def copyVertexAndEdges(self,destGraph):
+        vertexList=list()
+        for vertex in self.getListOfVertices():
+            vertexList.append(vertex)
+
+        destGraph.setListOfVertices(vertexList)
+
+        edgeList=list()
         for edge in self.getListOfEdges():
             beginVertex = edge.getBeginVertex()
             endVertex = edge.getEndVertex()
             weight = edge.getWeight()
-            copiedGraph.listOfEdges.append(DirectedEdge(beginVertex,endVertex,weight))
-        return copiedGraph
+            edgeList.append(DirectedEdge(beginVertex,endVertex,False,weight))
+        destGraph.setListOfEdges(edgeList)
+
+        return destGraph
+
+    def findDirectedEdge(self,seekedBeginVertexId,seekedEndVertexId)->DirectedEdge or None:
+        for edge in self.getListOfEdges():
+            beginVertexId=edge.getBeginVertex().getVertexId()
+            endVertexId = edge.getEndVertex().getVertexId()
+            if(beginVertexId==seekedBeginVertexId and endVertexId==seekedEndVertexId):
+                return edge
+
 
     def addEgde(self,newEdge:DirectedEdge):
-        self.listOfEdges.append(newEdge)
+        self.edges.append(newEdge)
+
+    def addVertex(self,newVertex:Vertex):
+        self.listOfVertices.append(newVertex)
 
     def getAdjecencyMatrixRepresentation(self)->list[list[int]]:
         return self.adjacencyMatrix
 
-    def getListofVertices(self)->list[Vertex]:
+    def getListOfVertices(self)->list[Vertex]:
         return self.listOfVertices
 
-    def getListOfEdges(self)->list[DirectedEdge]:
-        return self.listOfEdges
+    def setListOfVertices(self,newListOfVertices: list[Vertex])->None:
+        self.listOfVertices=newListOfVertices
 
+    def getListOfEdges(self)->list[DirectedEdge]:
+        return self.edges
+
+    def setListOfEdges(self,newListOfEdges: list[Vertex])->None:
+        self.edges=newListOfEdges
         
-        
+    def getAdjecencyList(self):
+        return self.adjacencyList
