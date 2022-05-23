@@ -34,12 +34,13 @@ def dijkstra(w, s,adjmatrix):
 
 
 def print_dijkstra(d_s, p_s, s):
-    print(f'START: s = {s + 1}\n')
+    s+=1
+    print('Start: s =', s, '\n')
     for i in range(len(d_s)):
-        j = int(i)
-        path = []
+        j = i
+        shortestpath = []
         while j is not None and j >= 0:
-            path.append(j + 1)
+            shortestpath.append(j + 1)
             j = p_s[j]
-        path.reverse()
-        print(f'd({i + 1}) = {d_s[i]} => [{" - ".join(map(str, path))}]\n')
+        shortestpath.reverse()
+        print(f'd({i + 1}) = {d_s[i]} => [{" - ".join(map(str, shortestpath))}]\n')
