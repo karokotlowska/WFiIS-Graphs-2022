@@ -7,7 +7,7 @@ def relax(u, v, w, d_s, p_s):
         p_s[v] = u
 
 
-def dijkstra(w, s):
+def dijkstra(w, s,adjmatrix):
     n = len(w)
     d_s = [0] * n
     p_s = [0] * n
@@ -28,7 +28,7 @@ def dijkstra(w, s):
         not_ready.remove(u)
 
         for v in not_ready:
-            if w[u][v] != 0:
+            if adjmatrix[u][v] != 0:
                 relax(u, v, w, d_s, p_s)
     return d_s, p_s
 

@@ -77,8 +77,9 @@ def johnson(graph: DirectedGraph) -> list[list[int]] or None:
     oldVertices = [vertex.getVertexId() for vertex in graph.getListOfVertices()]
     for u in oldVertices:
         for v in oldVertices:
-            distance, path = dijkstra(graph.generateWeightMatrix(),u)
-            D[u].append(distance - h[u] +h[v])
+            distance, path = dijkstra(graph.generateWeightMatrix(),u,graph.getAdjecencyMatrixRepresentation())
+            for i in range(len(distance)):
+                distance[i]=distance[i]-h[u]+h[v]
     return D
 
     

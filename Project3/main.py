@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     start_vertex = 0
     am_weighted = graph.getWeightAM()
-    d, p = dijkstra(am_weighted, start_vertex)
+    d, p = dijkstra(am_weighted, start_vertex,am_weighted)
     print_dijkstra(d, p, start_vertex)
 
     print('------zad3------ distance matrix')

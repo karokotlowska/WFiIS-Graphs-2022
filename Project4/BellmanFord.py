@@ -15,12 +15,12 @@ def bellmanFord(wMatrix, vertex, adjMatrix):
     d = [float('inf') for _ in range(n)]
     p = [-1 for _ in range(n)]
 
-    d[vertex - 1] = 0
-
-    for i in range(n):
-        for j in range(n):
-            if adjMatrix[i][j]==1:
-                relax(i, j, wMatrix, d, p)
+    d[vertex] = 0
+    for x in range(n-1):
+        for i in range(n):
+            for j in range(n):
+                if adjMatrix[i][j]==1:
+                    relax(i, j, wMatrix, d, p)
         
     for i in range(n):
         for j in range(n):
