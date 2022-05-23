@@ -49,11 +49,10 @@ if __name__ == '__main__':
     print('------zad5------ Prima')
     graph=Graph(vertices,None,probability,None)
     graph.generateRandomWeighted()
-    graph.drawWeightGraph()
     in_matrix = graph.adjacencyMatrix
-    res_matrix = primsMst(in_matrix)
+    outMatrix = primsMst(in_matrix)
     graph1 = Graph(vertices,None,probability, None)
-    graph1.adjacencyMatrix = res_matrix
+    graph1.adjacencyMatrix = outMatrix
     graph.drawWeightGraph()
     graph1.drawWeightGraph()
 
