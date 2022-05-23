@@ -16,7 +16,7 @@ from johnson import johnson
 
 '''Zad1 - Direcred Graph and Random Directed Graph'''
 print('\n\n-----zad1-----losowy graf skierowany \n\n')
-directedGraphRandom=DirectedGraph.randomDirectedGraph(5,0.5)
+directedGraphRandom=DirectedGraph.randomDirectedGraph(5,0.8)
 directedGraphRandom.printAdjecencyMatrixGraph()
 print('\n\n-----zad1-----przykladowy graf skierowany \n\n')
 matrix=fr.readMatrix('directedGraphExample1.txt')
@@ -50,7 +50,12 @@ print(d)
 print(p)
 
 print('\n\n\n-------Zad 4 ------- Algorytm Johnsona')
-
+'''Johnson for Random DirectedGraph'''
+# directedGraphRandom.generateRandomDirectedEdges(-5,10)
+# distanceMatrix=johnson(directedGraphRandom)
+# for row in distanceMatrix:
+#     print(row)
+'''Johnson for DirectedGraph'''
 distanceMatrix=johnson(directedGraph)
 for row in distanceMatrix:
     print(row)

@@ -27,7 +27,7 @@ class DirectedGraph(Graph):
         self.listOfVertices=listOfVertices
 
     ''' Random Directed Graph based on adjecency matrix. 
-    Function returns  matrix.'''
+    Function returns DirectedGraph.'''
     def randomDirectedGraph(n,p):
 
         matrix=emptyMatrix(n,n)
@@ -41,9 +41,7 @@ class DirectedGraph(Graph):
 
         return DirectedGraph(0,None,None,0,adjacencyList)
     
-    '''
-    Method generates Edges for a DirectedGraph object. Values are random generated
-    '''
+    '''Method generates Edges for a DirectedGraph object. Values are random generated'''
     def generateRandomDirectedEdges(self,lowerBoundry: int,upperBoundry: int):
         for i in range(0, len(self.adjacencyMatrix)):
             for j in range(0, len(self.adjacencyMatrix)):
@@ -55,7 +53,7 @@ class DirectedGraph(Graph):
                         weight=random.randint(lowerBoundry,upperBoundry)
                     newEdge = DirectedEdge(Vertex(i),Vertex(j),False,weight)
                     self.edges.append(newEdge)
-    
+
     def getWeightsFromFile(self,filename)->list[int]:
         weightsList=[]
         with open(filename, 'r') as f:
@@ -63,7 +61,9 @@ class DirectedGraph(Graph):
                 for el in line.split():
                     weightsList.append(int(el))
         return weightsList
-    
+
+    '''Method Generetes DirectedEgdes using input list. List must be of the same length as sum of ones in adjecencyMatrix.
+    Creates list of Edges, which is stored in an instance of DirectedGraph'''
     def generateDirectedEdgesFromList(self,weightsList: list[int]):
          index=0
          for i in range(0, len(self.adjacencyMatrix)):
@@ -72,7 +72,6 @@ class DirectedGraph(Graph):
                     newEdge = DirectedEdge(Vertex(i),Vertex(j),False,weightsList[index])
                     self.edges.append(newEdge)
                     index=index+1
-
 
     def generateWeightMatrix(self)->list[list[int]]:
         length=len(self.getListOfVertices())
@@ -83,7 +82,6 @@ class DirectedGraph(Graph):
             weightMatrix[beginIndex][endIndex]=edge.getWeight()
         
         return weightMatrix
-
 
     def printAdjecencyMatrixGraph(self)->None:
         adjMatrix=self.adjacencyMatrix
@@ -117,7 +115,6 @@ class DirectedGraph(Graph):
             endVertexId = edge.getEndVertex().getVertexId()
             if(beginVertexId==seekedBeginVertexId and endVertexId==seekedEndVertexId):
                 return edge
-
 
     def addEgde(self,newEdge:DirectedEdge):
         self.edges.append(newEdge)
