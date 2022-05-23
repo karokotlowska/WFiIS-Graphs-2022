@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
     start_vertex = 0
     am_weighted = graph.getWeightAM()
-    d, p = dijkstra(am_weighted, start_vertex,am_weighted)
+    d, p = dijkstra(am_weighted, start_vertex, am_weighted)
     print_dijkstra(d, p, start_vertex)
 
     print('------zad3------ distance matrix')
@@ -49,6 +49,7 @@ if __name__ == '__main__':
     print('------zad5------ Prima')
     graph=Graph(vertices,None,probability,None)
     graph.generateRandomWeighted()
+    graph.drawWeightGraph()
     in_matrix = graph.adjacencyMatrix
     res_matrix = primsMst(in_matrix)
     graph1 = Graph(vertices,None,probability, None)

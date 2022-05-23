@@ -50,6 +50,6 @@ def primsMst(inputMatrix):
             continue
         for j in range (len(edgesWeights[i])):
             column = edgesWeights[i][j][0]
-            value = edgesWeights[i][j][1]
-            mstMatrix[i][column] = mstMatrix[column][i] = value
+            weight = edgesWeights[i][j][1]
+            mstMatrix[i][column] = mstMatrix[column][i] = weight
     return mstMatrix
