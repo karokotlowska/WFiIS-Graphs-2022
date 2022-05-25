@@ -50,7 +50,7 @@ if __name__ == '__main__':
     graph=Graph(vertices,None,probability,None)
     graph.generateRandomWeighted()
     graph.drawWeightGraph()
-    in_matrix = graph.adjacencyMatrix
+    in_matrix = graph.getWeightAM()
     outMatrix = primsMst(in_matrix)
     graph1 = Graph(vertices,None,probability, None)
     graph1.adjacencyMatrix = outMatrix
