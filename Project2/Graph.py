@@ -63,8 +63,8 @@ class Graph:
         canvas = tk.Canvas(root, height=600, width=600, bg="white")
         diff_angle = 2 * math.pi / len(self.adjacencyMatrix)
 
-        am = self.adjacencyMatrix
-        edges = self.edges
+        am = copy.deepcopy(self.adjacencyMatrix)
+        edges = copy.deepcopy(self.edges)
 
         for edge in edges:
             s = edge.i
