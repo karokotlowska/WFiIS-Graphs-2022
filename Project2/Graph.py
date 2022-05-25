@@ -5,6 +5,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import tkinter as tk
 import randomGraph as randomGraph
+from copy import deepcopy
+import copy
 
 from AdjacencyList import *
 from AdjacencyMatrix import *
