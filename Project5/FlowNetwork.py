@@ -1,6 +1,9 @@
 import random
 import collections as cs
 import math
+import networkx as nx
+import matplotlib.pyplot as plt
+import collections
 
 def bfs(source, target, path, matrix):
         visited = [False for _ in range(len(matrix))]
@@ -58,7 +61,34 @@ class FlowNetwork:
             self.layers = list()
             self.layers.append(list([0]))
 
+    def draw_network(self, edges, flow):
+        radius = 8
 
+
+        G = nx.DiGraph()
+        for i in range(len(edges)):
+            G.add_edge(edges[i][0], edges[i][1], weight=edges[i][2])
+
+        G.add_edges_from([(1, 2)])
+        nodes = len(G)
+        alpha = 2 * math.pi / nodes
+
+        x_0, y_0 = 20, 20
+        positions = {}
+
+        for i in range(nodes):
+            positions.update(
+                {(i): (x_0 + radius * math.cos(i * alpha), y_0 + radius * math.sin(i * alpha))})
+
+        labels = nx.get_edge_attributes(G, 'weight')
+        order_labels = collections.OrderedDict(sorted(labels.items()))
+
+
+        nx.draw_networkx_labels(G, pos=positions)
+        nx.draw_networkx_edge_labels(G, pos=positions, edge_labels=order_labels, font_color='green')
+        nx.draw(G, pos=positions, connectionstyle="arc3,rad=0.4")
+        plt.show()
+		
     def getNumberOfV(layers, n):
       if n == 0:
         return 0
