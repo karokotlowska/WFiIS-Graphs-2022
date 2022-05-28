@@ -62,8 +62,7 @@ class FlowNetwork:
             self.layers.append(list([0]))
 
     def draw_network(self, edges, flow):
-        radius = 8
-
+        radius = 1000
 
         G = nx.DiGraph()
         for i in range(len(edges)):
@@ -83,10 +82,9 @@ class FlowNetwork:
         labels = nx.get_edge_attributes(G, 'weight')
         order_labels = collections.OrderedDict(sorted(labels.items()))
 
-
         nx.draw_networkx_labels(G, pos=positions)
-        nx.draw_networkx_edge_labels(G, pos=positions, edge_labels=order_labels, font_color='green')
-        nx.draw(G, pos=positions, connectionstyle="arc3,rad=0.4")
+        nx.draw_networkx_edge_labels(G, pos=positions, edge_labels=order_labels,label_pos=0.75, font_color='green')
+        nx.draw(G, pos=positions, connectionstyle="arc3,rad=0.1")
         plt.show()
 		
     def getNumberOfV(layers, n):
