@@ -175,4 +175,4 @@ class FlowNetwork:
         for i in adjacencyMatrix:
             print(i)      
       
-        return adjacencyMatrix, vertice_number
+        return adjacencyMatrix, vertice_number, edges
