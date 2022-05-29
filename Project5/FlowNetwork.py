@@ -1,51 +1,52 @@
 import random
-import collections as cs
-import math
+from math import *
 import networkx as nx
 import matplotlib.pyplot as plt
-import collections
+import collections as col
 
-def bfs(source, target, path, matrix):
-        visited = [False for _ in range(len(matrix))]
-        visited[source] = True
-        q = cs.deque([])
-        q.append(source)
+
+def bfs(start, end, path, matrix):
+        n = len(matrix)
+        visited = [False for _ in range(n)]
+        visited[start] = True
+        queue = []
+        queue.append(start)
         print(path)
 
-        while q:
-            u = q.popleft()
+        while queue:
+            node = queue.pop(0)
 
-            for ind, val in enumerate(matrix[u]):
-                if not visited[ind] and val > 0:
-                    q.append(ind)
-                    visited[ind] = True
-                    path[ind] = u
+            for i, bandwidth in enumerate(matrix[node]):
+                if not visited[i] and bandwidth > 0:
+                    queue.append(i)
+                    visited[i] = True
+                    path[i] = node
                     
-        return visited[target]
+        return visited[end]
 
 
-def ford_fulkerson(matrix, n):
+def ford_fulkerson(graphMatrix, n):
        
-        source = 0
-        target = n - 1
-        path = [-1 for _ in range(n)]
+        start = 0
+        end = n - 1
+        path = [-1] * n
         max_flow = 0
 
-        while bfs(source, target, path, matrix):
-            path_flow = math.inf
-            tmp = target
+        while bfs(start, end, path, graphMatrix):
+            path_flow = inf
+            node = end
 
-            while tmp != source:
-                path_flow = min(path_flow, matrix[path[tmp]][tmp])
-                tmp = path[tmp]
+            while node != start:
+                path_flow = min(path_flow, graphMatrix[path[node]][node])
+                node = path[node]
 
             max_flow += path_flow
-            v = target
-
-            while v != source:
+            
+            v = end
+            while v != start:
                 u = path[v]
-                matrix[u][v] -= path_flow
-                matrix[v][u] += path_flow
+                graphMatrix[u][v] -= path_flow
+                graphMatrix[v][u] += path_flow
                 v = path[v]
 
         return max_flow
@@ -70,17 +71,17 @@ class FlowNetwork:
 
         G.add_edges_from([(1, 2)])
         nodes = len(G)
-        alpha = 2 * math.pi / nodes
+        alpha = 2 * pi / nodes
 
         x_0, y_0 = 20, 20
         positions = {}
 
         for i in range(nodes):
             positions.update(
-                {(i): (x_0 + radius * math.cos(i * alpha), y_0 + radius * math.sin(i * alpha))})
+                {(i): (x_0 + radius * cos(i * alpha), y_0 + radius * sin(i * alpha))})
 
         labels = nx.get_edge_attributes(G, 'weight')
-        order_labels = collections.OrderedDict(sorted(labels.items()))
+        order_labels = col.OrderedDict(sorted(labels.items()))
 
         nx.draw_networkx_labels(G, pos=positions)
         nx.draw_networkx_edge_labels(G, pos=positions, edge_labels=order_labels,label_pos=0.75, font_color='green')
@@ -106,12 +107,7 @@ class FlowNetwork:
         self.layers.append(list([vertice_number]))
         vertice_number += 1
         print(f'Rozmieszczenie wierzcholkow na wartstwach', self.layers)
-  
-      
-        
 
-      
-        ''''''
         edges = []
 
         for i in range (self.layers[1][0], self.layers[1][-1] +1):
