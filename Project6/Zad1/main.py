@@ -21,23 +21,23 @@ def readAdjList(fileName):
             lista.append([])
             
             for i in line.split():
-                lista[iterator].append(dictionary1.get(i))
+                lista[iterator].append(dictionary1.get(i) + 1)
             iterator += 1
     
     return lista
 
 
-def pageRankRandomWalk(adjList, d = 0.15, N = 1000, v = 0):
+def pageRankRandomWalk(adjList, d = 0.15, N = 1000000, v = 0):
     visits = [0 for i in range(len(adjList))]
     for i in range(N):
         if random() < (1 - d):
-            v = choice(adjList[v])
-            visits[v] += 1
+            v = choice(adjList[v - 1])
+            visits[v - 1] += 1
         else:
-            v = randint(0, len(adjList)-1)
-            visits[v] += 1
+            v = randint(0, len(adjList) - 1)
+            visits[v - 1] += 1
 
-    return {vert: visits_sum / N for vert, visits_sum in enumerate(visits)}
+    return {vert: visitSum / N for vert, visitSum in enumerate(visits)}
 
 
 def pageRankIterative(adjList, d: float = 0.15):
@@ -58,7 +58,7 @@ def pageRankIterative(adjList, d: float = 0.15):
         prev = p.copy()
         p = p.dot(array)
 
-        if np.linalg.norm(p - prev) < 10**-5:
+        if np.linalg.norm(p - prev) < 1e-5:
             break
 
     return {k: round(v, 6) for k, v in enumerate(p)}
