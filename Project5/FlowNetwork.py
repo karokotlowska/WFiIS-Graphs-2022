@@ -69,7 +69,7 @@ class FlowNetwork:
         for i in range(len(edges)):
             G.add_edge(edges[i][0], edges[i][1], weight=edges[i][2])
 
-        G.add_edges_from([(1, 2)])
+        G.add_edges_from([(0, 1)])
         nodes = len(G)
         alpha = 2 * pi / nodes
 
@@ -88,14 +88,13 @@ class FlowNetwork:
         nx.draw(G, pos=positions, connectionstyle="arc3,rad=0.1")
         plt.show()
 		
-    def getNumberOfV(layers, n):
-      if n == 0:
-        return 0
-      else:
+    def getNumberOfVertices(layers, n):
+      if n != 0:
         return sum(len(i) for i in layers[:n])
+      else:
+        return 0
   
     def flow_network_generator(self, N):
-        '''spliting vertices into certain amount of layers'''
         n = self.layers_number - self.vertex_count
         vertice_number = 1
         for i in range(1, n + 1):
@@ -114,30 +113,32 @@ class FlowNetwork:
             weight = random.randrange(1, 11)
             edges.append((0, i , weight))
         
-        for q in range(1, self.layers_number-1):
-          if len(self.layers[q]) > len(self.layers[q+1]): 
-              bigger_layer, smaller_layer, ln = (q, q+1, len(self.layers[q]))
+        for i in range(1, self.layers_number-1):
+          if len(self.layers[i]) > len(self.layers[i+1]): 
+                lonLayer = i
+                shLayer = i+1
+                ln = len(self.layers[i])
           else:
-              bigger_layer, smaller_layer, ln=(q+1, q, len(self.layers[q+1]))
-          for i in range(ln):
-              if i < len(self.layers[smaller_layer]):
-                  i2 = i
+                lonLayer = i+1
+                shLayer = i
+                ln=len(self.layers[i+1])
+          for j in range(ln):
+              if j < len(self.layers[shLayer]):
+                  k = j
               else:
-                  i2=len(self.layers[smaller_layer])-1
+                  k=len(self.layers[shLayer])-1
                   
               weight = random.randrange(1, 11)
                                     
-              if smaller_layer > bigger_layer:    
-                edges.append((i + FlowNetwork.getNumberOfV(self.layers, bigger_layer), i2 + FlowNetwork.getNumberOfV(self.layers, smaller_layer), weight))
+              if shLayer > lonLayer:    
+                edges.append((j + FlowNetwork.getNumberOfVertices(self.layers, lonLayer), k + FlowNetwork.getNumberOfVertices(self.layers, shLayer), weight))
                 
               else:
-                edges.append((i2 + FlowNetwork.getNumberOfV(self.layers, smaller_layer), i + FlowNetwork.getNumberOfV(self.layers, bigger_layer), weight))
+                edges.append((k + FlowNetwork.getNumberOfVertices(self.layers, shLayer), j + FlowNetwork.getNumberOfVertices(self.layers, lonLayer), weight))
 
         print(edges)
         
 
-        '''adding random edges'''
-        '''wiemy ze tu jest 2N'''
         l=0
         while l < N:              
             p = random.randrange(0,self.layers[-1][0] + 1)
@@ -157,15 +158,16 @@ class FlowNetwork:
 						
                 l+=1
        
+        print('\n\n---------- Krawedzie wraz z wagami----------')
         print(edges)
 
 
-        '''creating adjacency matrix'''
         adjacencyMatrix = [[0] * (vertice_number ) for _ in range(vertice_number)]
 
         for val in edges:
             adjacencyMatrix[ val[0] ][ val[1] ] = val[2]
 
+        print('\n\n---------- Macierz sasiedztwa----------')
         for i in adjacencyMatrix:
             print(i)      
       

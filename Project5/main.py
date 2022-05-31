@@ -5,6 +5,7 @@ def task1():
     layers_number = 2
     network = FlowNetwork(layers_number)
     matrix, vertices_count, edges = network.flow_network_generator(2 * layers_number)
+    print('\n\n----------zad2-----------')
     max_flow = ford_fulkerson(matrix, vertices_count)
     print(max_flow)
     
